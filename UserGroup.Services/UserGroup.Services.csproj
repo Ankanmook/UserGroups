@@ -1,8 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UserGroup.DAL.Dapper\UserGroup.DAL.Dapper.csproj" />
+    <ProjectReference Include="..\UserGroup.DAL.EF\UserGroup.DAL.EF.csproj" />
+  </ItemGroup>
 
 </Project>

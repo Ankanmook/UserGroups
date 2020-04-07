@@ -12,11 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroups.Test", "UserGroups.Test\UserGroups.Test.csproj", "{1FFA5CF5-42A1-4CC8-8DA0-7E9DCFEFEE84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserGroups.Test", "UserGroups.Test\UserGroups.Test.csproj", "{1FFA5CF5-42A1-4CC8-8DA0-7E9DCFEFEE84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.Web", "UserGroup.Web\UserGroup.Web.csproj", "{FA13979A-E71D-4246-9969-575C7E534582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserGroup.Web", "UserGroup.Web\UserGroup.Web.csproj", "{FA13979A-E71D-4246-9969-575C7E534582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.Services", "UserGroup.Services\UserGroup.Services.csproj", "{65B50862-CB8C-4CA4-93D4-5AB2C1D96DFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserGroup.Services", "UserGroup.Services\UserGroup.Services.csproj", "{65B50862-CB8C-4CA4-93D4-5AB2C1D96DFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.DAL.EF", "UserGroup.DAL.EF\UserGroup.DAL.EF.csproj", "{B997655C-A0EB-434C-9CBF-979C7F3E5B88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.DAL.Dapper", "UserGroup.DAL.Dapper\UserGroup.DAL.Dapper.csproj", "{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +48,14 @@ Global
 		{65B50862-CB8C-4CA4-93D4-5AB2C1D96DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65B50862-CB8C-4CA4-93D4-5AB2C1D96DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65B50862-CB8C-4CA4-93D4-5AB2C1D96DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
