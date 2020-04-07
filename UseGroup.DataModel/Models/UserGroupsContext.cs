@@ -31,7 +31,8 @@ namespace UseGroup.DataModel.Models
         {
             modelBuilder.Entity<Group>(entity =>
             {
-                entity.HasIndex(e => e.Name);
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
 
                 entity.Property(e => e.Name).IsUnicode(false);
             });

@@ -24,11 +24,9 @@ CREATE TABLE [Group]
 )
 GO
 
---Name of group should be unique - why common sense 
-
-
 --Index creation on Group Name
-CREATE NONCLUSTERED INDEX IX_Group_Name
+--Name of group should be unique - why common sense 
+CREATE UNIQUE NONCLUSTERED INDEX IX_Group_Name
 ON [Group]
 (
 	[Name]

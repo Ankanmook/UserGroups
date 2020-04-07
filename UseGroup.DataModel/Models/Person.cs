@@ -14,7 +14,7 @@ namespace UseGroup.DataModel.Models
         public string Name { get; set; }
         public int GroupId { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }
 
         [ForeignKey(nameof(GroupId))]
         [InverseProperty("Person")]

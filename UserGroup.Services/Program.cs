@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UserGroups.Test
+namespace UserGroup.Services
 {
     class Program
     {
