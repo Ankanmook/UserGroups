@@ -14,5 +14,5 @@ Invoke-SqlCmd -ServerInstance -ANKANHOME\tupai -InputFile C:\Development\Eintech
 
 #Run yarn or npm if needed
 
-#Run Soution
+#Run Solution --IIS or kestrel or hosted on its own
 
