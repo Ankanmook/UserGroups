@@ -1,0 +1,1 @@
+﻿Invoke-SqlCmd -ServerInstance -ANKANHOME\tupai -InputFile C:\Development\Eintech\PersonGroup-Db.sql
