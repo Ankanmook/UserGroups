@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UserGroup.Common.DTO;
+using UserGroup.Services;
 using UserGroup.Web.Models;
 
 namespace UserGroup.Web.Controllers
@@ -16,10 +17,12 @@ namespace UserGroup.Web.Controllers
     public class PersonController : Controller
     {
         private readonly ILogger<PersonController> _logger;
+        private readonly IPersonService _personService;
 
-        public PersonController(ILogger<PersonController> logger)
+        public PersonController(ILogger<PersonController> logger, IPersonService personService)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
+            _personService = personService;
         }   
         
         [HttpGet (Name = "Get")]
@@ -30,7 +33,6 @@ namespace UserGroup.Web.Controllers
                 {
                     new {id = 1, Name = "Sypderman", Group = "DC", DateAdded = DateTime.UtcNow },
                     new {id = 1, Name = "Batman", Group = "Marvel", DateAdded = DateTime.UtcNow}
-
                 }
                 );
         }

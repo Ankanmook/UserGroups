@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace UserGroup.DAL.Dapper
@@ -17,7 +16,6 @@ namespace UserGroup.DAL.Dapper
     {
         private readonly IConfiguration _configuration;
         private Action<string, string> _logHandler; //Todo: simplify this
-
 
         public abstract string ConnectionString { get; }
 
@@ -39,7 +37,6 @@ namespace UserGroup.DAL.Dapper
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _logHandler = logHandler;
-
         }
 
         //needs to be set to true for load testing in DEV
@@ -58,10 +55,9 @@ namespace UserGroup.DAL.Dapper
         [ExcludeFromCodeCoverage]
         public async Task<List<T>> GetResultsAsync<T>(string procedureName, object parameters = null, IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted, int commandTimeout = 30)
         {
-
             return await WithConnectionAsync<T>(async c =>
             {
-                System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+                Stopwatch timer = new Stopwatch();
                 timer.Start();
                 var t = c.BeginTransaction(isolationLevel);
 
@@ -93,14 +89,12 @@ namespace UserGroup.DAL.Dapper
                     _logHandler(this.GetType().Name, $"Time taken to run procedure took {timer.ElapsedMilliseconds}ms : {procedureName} ");
                 }
                 return results.ToList();
-
             });
         }
 
         [ExcludeFromCodeCoverage]
         public async Task<List<T>> WithConnectionAsync<T>(Func<IDbConnection, Task<List<T>>> getData)
         {
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -109,7 +103,6 @@ namespace UserGroup.DAL.Dapper
                     {
                         connection.Open();
                     }
-
 
                     var data = await getData(connection); // Asynchronously execute getData, which has been passed in as a Func<IDBConnection, Task<T>>
 
@@ -123,12 +116,14 @@ namespace UserGroup.DAL.Dapper
             }
             catch (TimeoutException ex)
             {
-                throw new TimeoutException(String.Format("{0}.WithConnection() experienced a SQL timeout", GetType().FullName), ex);
+                throw new TimeoutException($"{ GetType().FullName}.WithConnection() experienced a SQL timeout", ex);
             }
+
             catch (SqlException ex)
             {
                 throw ex;
             }
+
             catch (Exception ex)
             {
                 throw ex;

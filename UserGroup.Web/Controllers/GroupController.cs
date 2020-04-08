@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UserGroup.Common.DTO;
+using UserGroup.Services;
 using UserGroup.Web.Models;
 
 
@@ -15,6 +16,15 @@ namespace UserGroup.Web.Controllers
     [Route("api/groups")]
     public class GroupController : Controller
     {
+        private readonly ILogger<GroupController> _logger;
+        private readonly IGroupService _groupService;
+
+        public GroupController(ILogger<GroupController> logger, IGroupService groupService)
+        {
+            _logger = logger ?? throw new ArgumentException(nameof(logger));
+            _groupService = groupService;
+        }
+
         [HttpGet(Name = "Get")]
         public IActionResult Get()
         {

@@ -13,6 +13,7 @@ using UseGroup.DataModel.Models;
 using Microsoft.Extensions.Configuration.Json;
 using UserGroup.Common.Contracts;
 using UserGroup.DAL.EF;
+using UserGroup.Services;
 
 namespace UserGroup.Web
 {
@@ -39,6 +40,7 @@ namespace UserGroup.Web
 
             ConfigureDbContext(services);
             ConfigureRepositories(services);
+            ConfigureServiceLayer(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,8 +87,15 @@ namespace UserGroup.Web
         public void ConfigureRepositories(IServiceCollection services)
         {
             services.AddScoped<IPersonRepository, PersonRepository>();
-            services.AddScoped<GroupRepository, GroupRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<ISearchRepository, SearchRepository>();
+        }
+
+        public void ConfigureServiceLayer(IServiceCollection services)
+        {
+            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IGroupService, GroupService>();
+            services.AddScoped<ISearchService, SearchService>();
         }
     }
 }
