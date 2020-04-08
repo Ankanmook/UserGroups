@@ -173,4 +173,4 @@ GO
 
 
 ---EF Scaffolding command if needed
---Scaffold-DBContext "Data Source=.;Initial Catalog=PersonGroups;Integrated Security=True;ConnectRetryCount= 0" Microsoft.EntityFrameworkCore.SQLServer -OutputDir Models -Context UserGroupsContext -DataAnnotations
+--Scaffold-DBContext "Data Source=.;Initial Catalog=PersonGroups;Integrated Security=True;ConnectRetryCount= 0" Microsoft.EntityFrameworkCore.SQLServer -OutputDir Models -Context PersonGroupsContext -DataAnnotations
