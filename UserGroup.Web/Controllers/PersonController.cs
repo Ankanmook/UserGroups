@@ -117,7 +117,7 @@ namespace UserGroup.Web.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var person = _personService.Get(id); //can check exist here
+            var person = _personService.Get(id);
             if (person == null)
                 return NotFound();
 
