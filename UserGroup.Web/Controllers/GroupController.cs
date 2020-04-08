@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using UserGroup.Common.DTO;
 using UserGroup.Web.Models;
 
 
@@ -12,12 +13,12 @@ namespace UserGroup.Web.Controllers
 {
     [ApiController]
     [Route("api/groups")]
-    public class GroupController
+    public class GroupController : Controller
     {
-        [HttpGet]
+        [HttpGet(Name = "Get")]
         public IActionResult Get()
         {
-            return new JsonResult(
+            return Ok(
                 new List<object>
                 {
                        new {id = 1, Name = "DC"},
@@ -26,20 +27,17 @@ namespace UserGroup.Web.Controllers
                 );
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetGroup")]
         public IActionResult GetGroup()
         {
-            return new JsonResult(
-                new List<object>
-                {
-                    new {id = 1, Name = "DC"},
-                    new {id = 1, Name = "Marvel"}
-                }
+            return Ok(
+
+                    new { id = 1, Name = "DC" }
                 );
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post(int id, [FromBody] GroupDto groupDto)
         {
             throw new NotImplementedException();
         }

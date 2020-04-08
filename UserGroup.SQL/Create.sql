@@ -71,7 +71,7 @@ BEGIN
 WITH CTE_Result AS
 (
 	SELECT 
-	p.[Name], p.[DateAdded], g.[Name] as GroupName, p.[Id]
+	p.[Name], p.[DateAdded], g.[Name] as GroupName, p.[Id], g.[Id] as GroupId
 	 FROM
 	[Person] p 
 	Inner Join 
@@ -116,7 +116,7 @@ WITH CTE_Result AS
 	(g.[Name]  is null or g.[Name]  like '%'+ @Group + '%') 
 	)
 
-	SELECT TotalRows, p.[Name], p.[DateAdded], g.[Name] as GroupName, p.[Id] 
+	SELECT TotalRows, p.[Name], p.[DateAdded], g.[Name] as GroupName, g.[Id] as GroupId, p.[Id] 
 	 FROM
 	[Person] p 
 	Inner Join 

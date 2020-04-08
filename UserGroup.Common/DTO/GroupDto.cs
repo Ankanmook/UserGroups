@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UserGroup.Common.DTO
 {
     public class GroupDto
     {
-        
+        [Required]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Name must be provided")]
+        [MaxLength(128)]
+        public int Name { get; set; }
     }
 }
