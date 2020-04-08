@@ -56,7 +56,7 @@ GO
 
 --store proc to search name
 
-CREATE OR ALTER Proc Search 
+CREATE OR ALTER Proc usp_Search 
 @Name varchar(128) = '', 
 @Group varchar(128) = '', 
 @PageNumber int = 1, 

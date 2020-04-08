@@ -14,7 +14,20 @@ namespace UserGroup.Web.Controllers
     public class PersonController : Controller
     {
         [HttpGet]
-        public JsonResult Get()
+        public IActionResult Get()
+        {
+            return new JsonResult(
+                new List<object>
+                {
+                    new {id = 1, Name = "Sypderman", Group = "DC", DateAdded = DateTime.UtcNow },
+                    new {id = 1, Name = "Batman", Group = "Marvel", DateAdded = DateTime.UtcNow}
+
+                }
+                );
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPerson()
         {
             return new JsonResult(
                 new List<object>
@@ -23,6 +36,30 @@ namespace UserGroup.Web.Controllers
                     new {id = 1, Name = "Marvel"}
                 }
                 );
+        }
+
+        [HttpPost]
+        public IActionResult Post()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut]
+        public IActionResult Put()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPatch]
+        public IActionResult Patch()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            throw new NotImplementedException();
         }
     }
 }
