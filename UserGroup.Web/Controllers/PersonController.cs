@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,23 +19,21 @@ namespace UserGroup.Web.Controllers
     {
         private readonly ILogger<PersonController> _logger;
         private readonly IPersonService _personService;
+        private readonly IMapper _mapper;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger,
+            IPersonService personService,
+            IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
             _personService = personService;
-        }   
-        
-        [HttpGet (Name = "Get")]
+            _mapper = mapper;
+        }
+
+        [HttpGet(Name = "Get")]
         public IActionResult Get()
         {
-            return Ok(
-                new List<object>
-                {
-                    new {id = 1, Name = "Sypderman", Group = "DC", DateAdded = DateTime.UtcNow },
-                    new {id = 1, Name = "Batman", Group = "Marvel", DateAdded = DateTime.UtcNow}
-                }
-                );
+            return Ok(_mapper.Map<IEnumerable<PersonDto>>(_personService.Get()));
         }
 
         [HttpGet("{id}", Name = "GetPerson")]
@@ -42,10 +41,7 @@ namespace UserGroup.Web.Controllers
         {
             try
             {
-                return Ok(
-               new { id = 1, Name = "Sypderman", Group = "DC", DateAdded = DateTime.UtcNow }
-                );
-
+                return Ok(_mapper.Map<PersonDto>(_personService.Get(id)));
             }
             catch (Exception ex)
             {

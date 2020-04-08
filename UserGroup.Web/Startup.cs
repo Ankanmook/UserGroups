@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration.Json;
 using UserGroup.Common.Contracts;
 using UserGroup.DAL.EF;
 using UserGroup.Services;
+using AutoMapper;
 
 namespace UserGroup.Web
 {
@@ -77,8 +78,7 @@ namespace UserGroup.Web
 
         public void ConfigureDbContext(IServiceCollection services)
         {
-            var connectionString = _configuration.GetConnectionString("PersonGroupsDbconnectionString");
-                
+            var connectionString = _configuration.GetConnectionString("PersonGroupsDbconnectionString");               
             services.AddDbContext<PersonGroupsContext>(o => {
                 o.UseSqlServer(connectionString);  
             });
@@ -96,6 +96,11 @@ namespace UserGroup.Web
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<ISearchService, SearchService>();
+        }
+
+        public void ConfigureAutomapper(IServiceCollection services)
+        {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }

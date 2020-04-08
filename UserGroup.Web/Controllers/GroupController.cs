@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UserGroup.Common.DTO;
@@ -18,32 +19,36 @@ namespace UserGroup.Web.Controllers
     {
         private readonly ILogger<GroupController> _logger;
         private readonly IGroupService _groupService;
+        private readonly IMapper _mapper;
 
-        public GroupController(ILogger<GroupController> logger, IGroupService groupService)
+        public GroupController(ILogger<GroupController> logger, 
+            IGroupService groupService,
+            IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
             _groupService = groupService;
+            _mapper = mapper;
         }
 
         [HttpGet(Name = "Get")]
         public IActionResult Get()
         {
-            return Ok(
-                new List<object>
-                {
-                       new {id = 1, Name = "DC"},
-                       new {id = 1, Name = "Marvel"}
-                }
-                );
+            return Ok(_mapper.Map<IEnumerable<GroupDto>>(_groupService.Get()));
         }
 
         [HttpGet("{id}", Name = "GetGroup")]
-        public IActionResult GetGroup()
+        public IActionResult GetGroup(int id)
         {
-            return Ok(
+            try
+            {
+                return Ok(_mapper.Map<PersonDto>(_groupService.Get(id)));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Exception happened getting person with id: {id}", ex);
+                return StatusCode(500, "A problem happened while handling your request");
 
-                    new { id = 1, Name = "DC" }
-                );
+            }
         }
 
         [HttpPost]
