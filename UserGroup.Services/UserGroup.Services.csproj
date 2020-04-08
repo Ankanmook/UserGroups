@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UserGroup.Common\UserGroup.Common.csproj" />
     <ProjectReference Include="..\UserGroup.DAL.Dapper\UserGroup.DAL.Dapper.csproj" />
     <ProjectReference Include="..\UserGroup.DAL.EF\UserGroup.DAL.EF.csproj" />
   </ItemGroup>
