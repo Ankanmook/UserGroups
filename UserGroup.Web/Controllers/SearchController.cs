@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using UserGroup.Common.DTO;
 using UserGroup.Services;
 using UserGroup.Web.Models;
 
@@ -13,7 +14,7 @@ namespace UserGroup.Web.Controllers
 {
     [ApiController]
     [Route("api/search")]
-    public class SearchController
+    public class SearchController : Controller
     {
         private ILogger<SearchController> _logger;
         private ISearchService _searchService;
@@ -25,6 +26,12 @@ namespace UserGroup.Web.Controllers
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
             _searchService = searchService;
+        }
+
+        [HttpGet(Name = "Search")]
+        public IActionResult Get()
+        {
+            return Ok();
         }
     }
 }

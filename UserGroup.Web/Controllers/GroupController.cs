@@ -14,7 +14,7 @@ using UserGroup.Web.Models;
 namespace UserGroup.Web.Controllers
 {
     [ApiController]
-    [Route("api/groups")]
+    [Route("api/group")]
     public class GroupController : Controller
     {
         private readonly ILogger<GroupController> _logger;
@@ -30,8 +30,8 @@ namespace UserGroup.Web.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "Get")]
-        public IActionResult Get()
+        [HttpGet(Name = "GetGroups")]
+        public IActionResult GetGroups()
         {
             return Ok(_mapper.Map<IEnumerable<GroupDto>>(_groupService.Get()));
         }
