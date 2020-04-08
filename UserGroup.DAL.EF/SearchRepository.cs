@@ -47,8 +47,9 @@ namespace UserGroup.DAL.EF
         int pageSize = 100,
         SortColumn sortColumn = SortColumn.Name,
         SortOrder sortOrder = SortOrder.Asc)
-            {
-                //throw not implemented exception
-            }
+        {
+
+            throw new NotImplementedException();
+        }
     }
 }
