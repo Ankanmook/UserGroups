@@ -1,1 +1,3 @@
 # UserGroups
+
+Added NLog Logging 
