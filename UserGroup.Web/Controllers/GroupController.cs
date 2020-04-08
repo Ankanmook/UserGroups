@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using UseGroup.DataModel.Models;
 using UserGroup.Common.DTO;
 using UserGroup.Services;
-using UserGroup.Web.Models;
-
 
 namespace UserGroup.Web.Controllers
 {
@@ -21,13 +17,13 @@ namespace UserGroup.Web.Controllers
         private readonly IGroupService _groupService;
         private readonly IMapper _mapper;
 
-        public GroupController(ILogger<GroupController> logger, 
+        public GroupController(ILogger<GroupController> logger,
             IGroupService groupService,
             IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
-            _groupService = groupService;
-            _mapper = mapper;
+            _groupService = groupService ?? throw new ArgumentException(nameof(_groupService));
+            _mapper = mapper ?? throw new ArgumentException(nameof(_mapper));
         }
 
         [HttpGet]
@@ -47,14 +43,28 @@ namespace UserGroup.Web.Controllers
             {
                 _logger.LogCritical($"Exception happened getting person with id: {id}", ex);
                 return StatusCode(500, "A problem happened while handling your request");
-
             }
         }
 
         [HttpPost]
-        public IActionResult Post(int id, [FromBody] GroupDto groupDto)
+        public IActionResult Post([FromBody] GroupCreationDto groupCreationDto)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var group = _mapper.Map<Group>(groupCreationDto);
+
+            if (!_groupService.Add(group))
+            {
+                return BadRequest("Group already exists");
+            }
+
+            var createdGroup = _mapper.Map<Group>(group);
+            _groupService.Save();
+
+            return CreatedAtRoute("GetGroup", new { createdGroup.Id });
         }
 
         [HttpPut]

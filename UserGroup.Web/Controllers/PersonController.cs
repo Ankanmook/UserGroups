@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using UseGroup.DataModel.Models;
 using UserGroup.Common.DTO;
 using UserGroup.Services;
-using UserGroup.Web.Models;
 
 namespace UserGroup.Web.Controllers
 {
@@ -26,8 +23,8 @@ namespace UserGroup.Web.Controllers
             IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
-            _personService = personService;
-            _mapper = mapper;
+            _personService = personService ?? throw new ArgumentException(nameof(_personService));
+            _mapper = mapper ?? throw new ArgumentException(nameof(_mapper));
         }
 
         [HttpGet]
@@ -47,112 +44,87 @@ namespace UserGroup.Web.Controllers
             {
                 _logger.LogCritical($"Exception happened getting person with id: {id}", ex);
                 return StatusCode(500, "A problem happened while handling your request");
-
             }
-
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] PersonForCreationDto personCreationDto)
+        public IActionResult Post([FromBody] PersonCreationDto personCreationDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            //if group not found 
-            return NotFound();
+            //if group does not exist
+            if (!_personService.GroupExists(personCreationDto.GroupId))
+                return NotFound();
 
-            //request completed successfully
-            return CreatedAtRoute("GetPerson", new { personCreationDto.Id });
+            var person = _mapper.Map<Person>(personCreationDto);
+            _personService.Add(person);
+            _personService.Save();
+
+            var createdPerson = _mapper.Map<PersonDto>(person);
+
+            return CreatedAtRoute("GetPerson", new { createdPerson.Id });
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, PersonForUpdateDto personCreationDto)
+        public IActionResult Put(int id, PersonUpdateDto personupdateDto)
         {
-            
-            if(!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            }
+            //if null either person or group does not exist
+            if (!_personService.Exists(id) || !_personService.GroupExists(personupdateDto.GroupId))
+                return NotFound();
 
-            //if null either person or group
-            return NotFound();
+            var person = _mapper.Map<Person>(personupdateDto);
+            _personService.Update(person);
+            _personService.Save();
 
-            //request completed successfully
             return NoContent();
-
         }
 
         /// <summary>
         /// Partial update only
         /// </summary>
         /// <returns></returns>
-        [HttpPatch]
-        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<PersonForUpdateDto> patchDoc)
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<PersonUpdateDto> patchDoc)
         {
-            var group = new GroupDto(); //get this from service
-            var person = new PersonDto(); //get this from service
-
-            if (group == null)
-            {
-                return NotFound();
-            }
-
+            var person = _personService.Get(id); //can check exist here
             if (person == null)
-            {
                 return NotFound();
-            }
 
-            //from repository
-            var personFromStore = new PersonDto()
-            {
-
-            };
-
-            var personToPatch = new PersonForUpdateDto()
-            {
-                Name = personFromStore.Name,
-                DateAdded = personFromStore.DateAdded,
-                GroupId = personFromStore.GroupId
-            };
-
+            var personToPatch = _mapper.Map<PersonUpdateDto>(person);
             patchDoc.ApplyTo(personToPatch, ModelState);
 
+            if (!_personService.GroupExists(personToPatch.GroupId))
+                return NotFound();
 
-            if(!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            }
 
             //for validating the person entity which needed patching [accidentally making the fields invalid]
             if (!TryValidateModel(personToPatch))
-            {
                 return BadRequest(ModelState);
-            }
 
-
-            //update the person
+            _mapper.Map(personToPatch, person);
+            _personService.Update(person);
+            _personService.Save();
 
             return NoContent();
-
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var person = new PersonDto(); //get this from service
-
+            var person = _personService.Get(id); //can check exist here
             if (person == null)
-            {
                 return NotFound();
-            }
 
-            //delete the person
+            _personService.Delete(person);
+            _personService.Save();
 
             return NoContent();
-
         }
     }
 }

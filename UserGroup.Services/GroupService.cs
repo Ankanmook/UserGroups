@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.Contracts;
 
@@ -25,6 +21,31 @@ namespace UserGroup.Services
         public Group Get(int id)
         {
             return _groupRepository.Get(id);
+        }
+
+        public bool Exists(int id)
+        {
+            return _groupRepository.Exists(id);
+        }
+
+        /// <summary>
+        /// Checks the unique key in group name
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public bool Add(Group group)
+        {
+            if (_groupRepository.GroupNameExists(group.Name))
+            {
+                return false;
+            }
+            _groupRepository.Add(group);
+            return true;
+        }
+
+        public bool Save()
+        {
+            return _groupRepository.Save();
         }
     }
 }

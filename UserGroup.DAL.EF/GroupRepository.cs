@@ -23,5 +23,26 @@ namespace UserGroup.DAL.EF
         {
             return _context.Group.FirstOrDefault(g => g.Id == id);
         }
+
+        public bool Exists(int id)
+        {
+            return _context.Group.Any(g => g.Id == id);
+        }
+
+        public void Add(Group group)
+        {
+            _context.Group.Add(group);
+        }
+
+        public bool Save()
+        {
+            return _context.SaveChanges() >= 0;
+        }
+
+        public bool GroupNameExists(string name)
+        {
+            //very inefficient string lowecase matching 
+            return _context.Group.Any(g => g.Name.ToLower() == name.ToLower());
+        }
     }
 }

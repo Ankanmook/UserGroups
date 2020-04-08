@@ -8,5 +8,12 @@ namespace UserGroup.Common.Contracts
         IEnumerable<Person> Get(bool includeGroup = false);
         Person Get(int id, bool includeGroup = false);
         IEnumerable<Person> GetByGroup(int groupId, bool includeGroup = false);
+        bool Exists(int id);
+
+        bool Save();
+        void Add(Person person);
+        void Update(Person person);
+
+        void Delete(Person person);
     }
 }

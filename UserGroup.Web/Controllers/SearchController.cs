@@ -25,7 +25,8 @@ namespace UserGroup.Web.Controllers
             IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
-            _searchService = searchService;
+            _searchService = searchService ?? throw new ArgumentException(nameof(searchService));
+            _mapper = mapper ?? throw new ArgumentException(nameof(_mapper));
         }
 
         [HttpGet(Name = "Search")]

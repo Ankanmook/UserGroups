@@ -23,9 +23,8 @@ namespace UserGroup.Common.DTO
 
 
     ///can use fluent validation
-    public class PersonForCreationDto
+    public class PersonCreationDto
     {
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "Name must be provided")]
         [MaxLength(128)]
@@ -38,7 +37,7 @@ namespace UserGroup.Common.DTO
         public int GroupId { get; set; }
     }
 
-    public class PersonForUpdateDto
+    public class PersonUpdateDto
     {
         [Required(ErrorMessage = "Name must be provided")]
         [MaxLength(128)]

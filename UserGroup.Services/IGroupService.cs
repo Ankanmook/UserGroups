@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UseGroup.DataModel.Models;
 
 namespace UserGroup.Services
@@ -10,6 +6,13 @@ namespace UserGroup.Services
     public interface IGroupService
     {
         IEnumerable<Group> Get();
+
         Group Get(int id);
+
+        bool Exists(int id);
+
+        bool Add(Group group);
+
+        bool Save();
     }
 }

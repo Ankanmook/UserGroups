@@ -46,5 +46,30 @@ namespace UserGroup.DAL.EF
             return _context.Person
                 .FirstOrDefault(p => p.Id == id);
         }
+
+        public bool Exists(int id)
+        {
+            return _context.Group.Any(g => g.Id == id);
+        }
+
+        public void Add(Person person)
+        {
+            _context.Person.Add(person);
+        }
+
+        public void Update(Person person)
+        {
+            _context.Person.Update(person);
+        }
+
+        public bool Save()
+        {
+            return _context.SaveChanges() >= 0;
+        }
+
+        public void Delete(Person person)
+        {
+            _context.Person.Remove(person);
+        }
     }
 }
