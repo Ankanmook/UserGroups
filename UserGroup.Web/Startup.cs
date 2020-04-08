@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UseGroup.DataModel.Models;
 using Microsoft.Extensions.Configuration.Json;
+using UserGroup.Common.Contracts;
+using UserGroup.DAL.EF;
 
 namespace UserGroup.Web
 {
@@ -36,6 +38,7 @@ namespace UserGroup.Web
             services.AddMvc();
 
             ConfigureDbContext(services);
+            ConfigureRepositories(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +80,13 @@ namespace UserGroup.Web
             services.AddDbContext<PersonGroupsContext>(o => {
                 o.UseSqlServer(connectionString);  
             });
+        }
+
+        public void ConfigureRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<GroupRepository, GroupRepository>();
+            services.AddScoped<ISearchRepository, SearchRepository>();
         }
     }
 }
