@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserGroup.Services", "UserG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.DAL.EF", "UserGroup.DAL.EF\UserGroup.DAL.EF.csproj", "{B997655C-A0EB-434C-9CBF-979C7F3E5B88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.DAL.Dapper", "UserGroup.DAL.Dapper\UserGroup.DAL.Dapper.csproj", "{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGroup.Common", "UserGroup.Common\UserGroup.Common.csproj", "{26DC9F2B-4F66-4608-ABB3-6850B4884E39}"
 EndProject
 Global
@@ -55,10 +53,6 @@ Global
 		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B997655C-A0EB-434C-9CBF-979C7F3E5B88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC514A0F-AD08-4CA7-A0EF-BCCDF6D46BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26DC9F2B-4F66-4608-ABB3-6850B4884E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26DC9F2B-4F66-4608-ABB3-6850B4884E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26DC9F2B-4F66-4608-ABB3-6850B4884E39}.Release|Any CPU.ActiveCfg = Release|Any CPU

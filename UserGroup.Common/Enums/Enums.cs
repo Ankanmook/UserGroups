@@ -11,4 +11,10 @@
         Name,
         Group
     }
+
+    public enum SearchOption
+    {
+        EF = 0,//Default
+        Dapper = 1
+    }
 }
