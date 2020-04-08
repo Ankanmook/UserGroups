@@ -30,8 +30,8 @@ namespace UserGroup.Web.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "GetGroups")]
-        public IActionResult GetGroups()
+        [HttpGet]
+        public IActionResult Get()
         {
             return Ok(_mapper.Map<IEnumerable<GroupDto>>(_groupService.Get()));
         }

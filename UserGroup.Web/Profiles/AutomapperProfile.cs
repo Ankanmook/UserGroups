@@ -19,6 +19,7 @@ namespace UserGroup.Web.Profiles
             CreateMap<Person, Common.DTO.PersonForUpdateDto>();
 
             CreateMap<Group, Common.DTO.GroupDto>();
+            
             //CreateMap<Group, Common.DTO.GroupForCreationDto>();
             //CreateMap<Group, Common.DTO.GroupForUpdateDto>();
 
