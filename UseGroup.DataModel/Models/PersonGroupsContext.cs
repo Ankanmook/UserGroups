@@ -4,28 +4,26 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace UseGroup.DataModel.Models
 {
-    public partial class UserGroupsContext : DbContext
+    public partial class PersonGroupsContext : DbContext
     {
-        public UserGroupsContext()
-        {
-        }
 
-        public UserGroupsContext(DbContextOptions<UserGroupsContext> options)
+        public PersonGroupsContext(DbContextOptions<PersonGroupsContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Group> Group { get; set; }
         public virtual DbSet<Person> Person { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PersonGroups;Integrated Security=True;ConnectRetryCount= 0");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PersonGroups;Integrated Security=True;ConnectRetryCount= 0");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

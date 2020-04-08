@@ -8,6 +8,7 @@ namespace UseGroup.DataModel.Models
     public partial class Person
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [StringLength(128)]
