@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,9 +14,8 @@ namespace UserGroup.DAL.EF
     {
         public const string SearchPerson_StoreProc = "[dbo].[usp_Search]";
 
-        public SearchRepository(IConfiguration configuration, Action<string, string> logHandler) : base(configuration, logHandler)
-        {
-        }
+        public SearchRepository(IConfiguration configuration, ILogger<SearchRepository> logger) 
+            : base(configuration, logger) { }
 
         public override string ConnectionString => PersonGroupsDbConnectionString;
 

@@ -19,19 +19,6 @@ namespace UserGroup.Web
             {
                 logger.Info("Initializing application...");
                 var host = CreateHostBuilder(args).Build();
-
-                //TODO: remove this
-                //using(var scope = host.Services.CreateScope())
-                //{
-                //    try
-                //    {
-                //        var context = scope.ServiceProvider.GetService<PersonGroupsContext>();
-                //        context.Database.EnsureCreated();
-                //        context.Database.Migrate();
-                //    }
-                //}
-
-                //run the web app
                 host.Run();
             }
             catch (Exception ex)

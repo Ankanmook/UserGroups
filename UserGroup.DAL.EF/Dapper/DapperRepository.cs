@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +16,7 @@ namespace UserGroup.DAL.Dapper
     public abstract class DapperRepository
     {
         private readonly IConfiguration _configuration;
-        private Action<string, string> _logHandler; //Todo: simplify this
+        private readonly ILogger _logger;
 
         public abstract string ConnectionString { get; }
 
@@ -33,10 +34,10 @@ namespace UserGroup.DAL.Dapper
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="logHandler"></param>
-        public DapperRepository(IConfiguration configuration, Action<string, string> logHandler)
+        public DapperRepository(IConfiguration configuration, ILogger logger)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            _logHandler = logHandler;
+            _logger = logger ?? throw new ArgumentException(nameof(logger));
         }
 
         //needs to be set to true for load testing in DEV
@@ -86,7 +87,7 @@ namespace UserGroup.DAL.Dapper
                 timer.Stop();
                 if (LogTimes)
                 {
-                    _logHandler(this.GetType().Name, $"Time taken to run procedure took {timer.ElapsedMilliseconds}ms : {procedureName} ");
+                    _logger.LogInformation(this.GetType().Name, $"Time taken to run procedure took {timer.ElapsedMilliseconds}ms : {procedureName} ");
                 }
                 return results.ToList();
             });
