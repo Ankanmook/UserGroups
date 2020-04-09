@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.DTO;
 using UserGroup.DataModel.Helpers;
-using UserGroup.Services;
+using UserGroup.Common.Contracts;
 
 namespace UserGroup.Web.Controllers
 {

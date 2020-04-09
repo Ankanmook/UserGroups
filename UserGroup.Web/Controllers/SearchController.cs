@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using UserGroup.Common.Helper;
-using UserGroup.Services;
 using UserGroup.Web.Models;
+using UserGroup.Common.Contracts;
 
 namespace UserGroup.Web.Controllers
 {
