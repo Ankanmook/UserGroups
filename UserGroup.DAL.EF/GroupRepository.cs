@@ -2,6 +2,7 @@
 using System.Linq;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.Contracts;
+using UserGroup.DataModel.Helpers;
 
 namespace UserGroup.DAL.EF
 {
@@ -14,9 +15,11 @@ namespace UserGroup.DAL.EF
             _context = context;
         }
 
-        public IEnumerable<Group> Get()
+        public IEnumerable<Group> Get(ResourceParameters resourceParameters)
         {
-            return _context.Group.ToList();
+            return _context.Group
+                .Skip(resourceParameters.PageSize * (resourceParameters.PageNumber - 1))
+                .ToList();
         }
 
         public Group Get(int id)

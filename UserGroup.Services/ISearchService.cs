@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using UserGroup.Common.DTO;
+using UserGroup.Common.Helper;
 
 namespace UserGroup.Services
 {
     public interface ISearchService
     {
-        
+        Task<List<SearchResultDto>> GetSearchResult(SearchResourceParameter resourceParameter);
     }
 }

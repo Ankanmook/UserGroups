@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UseGroup.DataModel.Models;
+using UserGroup.DataModel.Helpers;
 
 namespace UserGroup.Services
 {
     public interface IPersonService
     {
-        IEnumerable<Person> Get();
+        IEnumerable<Person> Get(ResourceParameters resourceParameters);
 
         Person Get(int id);
 

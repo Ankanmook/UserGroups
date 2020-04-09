@@ -14,7 +14,7 @@
 
     public enum SearchOption
     {
-        EF = 0,//Default
-        Dapper = 1
+        Dapper = 0, //Default 
+        EF = 1,
     }
 }

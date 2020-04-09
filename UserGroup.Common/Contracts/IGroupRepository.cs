@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UseGroup.DataModel.Models;
+using UserGroup.DataModel.Helpers;
 
 namespace UserGroup.Common.Contracts
 {
     public interface IGroupRepository
     {
-        IEnumerable<Group> Get();
+        IEnumerable<Group> Get(ResourceParameters resourceParameters);
 
         Group Get(int id);
 

@@ -13,5 +13,6 @@ namespace UserGroup.Common.Contracts
         Task<List<SearchResultDto>> GetSearchResultUsingDapper(string name, string group, int pageNumber = 1, int pageSize = 100, SortColumn sortColumn = SortColumn.Name, SortOrder sortOrder = SortOrder.Asc);
 
         Task<List<SearchResultDto>> GetSearchResultUsingEFCore(string name, string group, int pageNumber = 1, int pageSize = 100, SortColumn sortColumn = SortColumn.Name, SortOrder sortOrder = SortOrder.Asc);
+        Task<List<SearchResultDto>> GetSearchResultUsingDapper(object name, object group, int pageNumber, int pageSize);
     }
 }

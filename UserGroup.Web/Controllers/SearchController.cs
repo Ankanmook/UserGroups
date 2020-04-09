@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using UserGroup.Common.DTO;
+using UserGroup.Common.Helper;
 using UserGroup.Services;
 using UserGroup.Web.Models;
 
@@ -20,7 +20,7 @@ namespace UserGroup.Web.Controllers
         private ISearchService _searchService;
         private readonly IMapper _mapper;
 
-        public SearchController(ILogger<SearchController> logger, 
+        public SearchController(ILogger<SearchController> logger,
             ISearchService searchService,
             IMapper mapper)
         {
@@ -29,10 +29,30 @@ namespace UserGroup.Web.Controllers
             _mapper = mapper ?? throw new ArgumentException(nameof(_mapper));
         }
 
-        [HttpGet(Name = "Search")]
-        public IActionResult Get()
+        [HttpGet]
+        public async Task<IActionResult> Get(SearchResourceParameter resourceParameter)
         {
-            return Ok();
+            try
+            {
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
+                var searchResult = await _searchService.GetSearchResult(resourceParameter);
+                timer.Stop();
+
+                var searchResponse = new SearchViewModel()
+                {
+                    Total = searchResult.Any() ? searchResult.Count : 0,
+                    Results = _mapper.Map<IEnumerable<SearchResultViewModel>>(searchResult),
+                    SearchOption = resourceParameter.SearchOption,
+                    ResponseTime = timer.ElapsedMilliseconds
+                };
+                return Ok(searchResponse);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Exception happened searching person", ex`);
+                return StatusCode(500, "A problem happened while handling your request");
+            }
         }
     }
 }

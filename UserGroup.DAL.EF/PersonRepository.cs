@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.Contracts;
+using UserGroup.DataModel.Helpers;
 
 namespace UserGroup.DAL.EF
 {
@@ -15,11 +16,13 @@ namespace UserGroup.DAL.EF
             _context = context;
         }
 
-        public IEnumerable<Person> Get(bool includeGroup = false)
+        public IEnumerable<Person> Get(ResourceParameters resourceParameters, bool includeGroup = false)
         {
             if (includeGroup)
                 return _context.Person.Include(p => p.Group)
-                    .OrderBy(p => p.DateAdded).ToList();
+                    .OrderBy(p => p.DateAdded)
+                    .Skip(resourceParameters.PageSize * (resourceParameters.PageNumber - 1))
+                    .ToList();
 
 
             return _context.Person.OrderBy(p => p.DateAdded).ToList();

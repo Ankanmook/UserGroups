@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.Contracts;
+using UserGroup.DataModel.Helpers;
 
 namespace UserGroup.Services
 {
@@ -13,9 +14,9 @@ namespace UserGroup.Services
             _groupRepository = groupRepository;
         }
 
-        public IEnumerable<Group> Get()
+        public IEnumerable<Group> Get(ResourceParameters resourceParameters)
         {
-            return _groupRepository.Get();
+            return _groupRepository.Get(resourceParameters);
         }
 
         public Group Get(int id)

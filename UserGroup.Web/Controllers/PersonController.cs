@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.DTO;
+using UserGroup.DataModel.Helpers;
 using UserGroup.Services;
 
 namespace UserGroup.Web.Controllers
@@ -18,6 +19,7 @@ namespace UserGroup.Web.Controllers
         private readonly IPersonService _personService;
         private readonly IMapper _mapper;
 
+
         public PersonController(ILogger<PersonController> logger,
             IPersonService personService,
             IMapper mapper)
@@ -28,9 +30,9 @@ namespace UserGroup.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(ResourceParameters resourceParameters)
         {
-            return Ok(_mapper.Map<IEnumerable<PersonDto>>(_personService.Get()));
+            return Ok(_mapper.Map<IEnumerable<PersonDto>>(_personService.Get(resourceParameters)));
         }
 
         [HttpGet("{id}", Name = "GetPerson")]

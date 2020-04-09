@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UseGroup.DataModel.Models;
 using UserGroup.Common.DTO;
+using UserGroup.DataModel.Helpers;
 using UserGroup.Services;
 
 namespace UserGroup.Web.Controllers
@@ -27,9 +28,9 @@ namespace UserGroup.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(ResourceParameters resourceParameters)
         {
-            return Ok(_mapper.Map<IEnumerable<GroupDto>>(_groupService.Get()));
+            return Ok(_mapper.Map<IEnumerable<GroupDto>>(_groupService.Get(resourceParameters)));
         }
 
         [HttpGet("{id}", Name = "GetGroup")]
