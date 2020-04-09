@@ -1,4 +1,5 @@
-﻿Set-ExecutionPolicy unrestricted
+﻿## This work is still incomplete
+Set-ExecutionPolicy unrestricted
 
 Import-Module WebAdministration
 
