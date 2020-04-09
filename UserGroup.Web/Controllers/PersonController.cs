@@ -65,17 +65,18 @@ namespace UserGroup.Web.Controllers
 
             var createdPerson = _mapper.Map<PersonDto>(person);
 
-            return CreatedAtRoute("GetPerson", new { createdPerson.Id });
+            //return CreatedAtRoute("GetPerson", new { createdPerson.Id });
+            return GetPerson(createdPerson.Id);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, PersonUpdateDto personupdateDto)
+        [HttpPut]
+        public IActionResult Put(PersonUpdateDto personupdateDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             //if null either person or group does not exist
-            if (!_personService.Exists(id) || !_personService.GroupExists(personupdateDto.GroupId))
+            if (!_personService.Exists(personupdateDto.Id) || !_personService.GroupExists(personupdateDto.GroupId))
                 return NotFound();
 
             var person = _mapper.Map<Person>(personupdateDto);

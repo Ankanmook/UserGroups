@@ -52,7 +52,7 @@ namespace UserGroup.DAL
 
         public bool Exists(int id)
         {
-            return _context.Group.Any(g => g.Id == id);
+            return _context.Person.Any(g => g.Id == id);
         }
 
         public void Add(Person person)
