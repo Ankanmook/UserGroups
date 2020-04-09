@@ -25,8 +25,9 @@ namespace UserGroup.Services
             }
             else
             {
-                return await _searchRepository.GetSearchResultUsingDapper(resourceParameter.Name, resourceParameter.Group,
-                resourceParameter.PageNumber, resourceParameter.PageSize);
+                //may be bad practise
+                return await Task.FromResult(_searchRepository.GetSearchResultUsingEFCore(resourceParameter.Name, resourceParameter.Group,
+                resourceParameter.PageNumber, resourceParameter.PageSize));
             }
         }
     }
