@@ -47,8 +47,7 @@ namespace UserGroup.DAL.Dapper
             get
             {
                 var dataAccessLogTime = _configuration.GetSection("DataAccessLogTime").Value ?? string.Empty;
-                bool logTimes = false;
-                bool.TryParse(dataAccessLogTime, out logTimes);
+                bool.TryParse(dataAccessLogTime, out bool logTimes);
                 return logTimes;
             }
         }
