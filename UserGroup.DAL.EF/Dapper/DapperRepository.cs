@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using UserGroup.Common;
 
 namespace UserGroup.DAL.Dapper
 {
@@ -23,7 +24,7 @@ namespace UserGroup.DAL.Dapper
         {
             get
             {
-                return _configuration.GetConnectionString("PersonGroupsDbconnectionString"); ;
+                return _configuration.GetConnectionString(Constants.DbConnectionString); ;
             }
         }
 
@@ -45,7 +46,7 @@ namespace UserGroup.DAL.Dapper
         {
             get
             {
-                var dataAccessLogTime = _configuration.GetSection("DataAccessLogTime").Value ?? string.Empty;
+                var dataAccessLogTime = _configuration.GetSection(Constants.DataAccessLogTime).Value ?? string.Empty;
                 bool.TryParse(dataAccessLogTime, out bool logTimes);
                 return logTimes;
             }

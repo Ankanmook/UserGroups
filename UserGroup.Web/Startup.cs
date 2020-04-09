@@ -15,6 +15,7 @@ using UserGroup.Common.Contracts;
 using UserGroup.DAL.EF;
 using UserGroup.Services;
 using AutoMapper;
+using UserGroup.Common;
 
 namespace UserGroup.Web
 {
@@ -79,7 +80,7 @@ namespace UserGroup.Web
 
         public void ConfigureDbContext(IServiceCollection services)
         {
-            var connectionString = _configuration.GetConnectionString("PersonGroupsDbconnectionString");               
+            var connectionString = _configuration.GetConnectionString(Constants.DbConnectionString);               
             services.AddDbContext<PersonGroupsContext>(o => {
                 o.UseSqlServer(connectionString);  
             });
