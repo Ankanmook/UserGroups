@@ -50,7 +50,7 @@ namespace UserGroup.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical($"Exception happened searching person", ex`);
+                _logger.LogCritical($"Exception happened searching person", ex);
                 return StatusCode(500, "A problem happened while handling your request");
             }
         }
