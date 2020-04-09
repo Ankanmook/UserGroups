@@ -116,6 +116,8 @@ namespace UserGroup.DAL
                 person.OrderByDescending(p => p.Group).ThenBy(p => p.Name);
             }
 
+            //page size problem needs to be addressed for EF
+
             return person.Skip(pageSize * (pageNumber - 1))
                 .Select(p => new SearchResultDto()
                 {
