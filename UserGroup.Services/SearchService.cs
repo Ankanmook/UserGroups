@@ -18,7 +18,7 @@ namespace UserGroup.Services
 
         public async Task<List<SearchResultDto>> Get(SearchResourceParameter resourceParameter)
         {
-            if (resourceParameter.SearchOption == SearchOption.EF)
+            if (resourceParameter.SearchOption == SearchOption.Dapper)//default
             {
                 return await _searchRepository.GetSearchResultUsingDapper(resourceParameter.Name, resourceParameter.Group,
                 resourceParameter.PageNumber, resourceParameter.PageSize);
