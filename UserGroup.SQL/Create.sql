@@ -24,11 +24,9 @@ CREATE TABLE [Group]
 )
 GO
 
---Name of group should be unique - why common sense 
-
-
 --Index creation on Group Name
-CREATE NONCLUSTERED INDEX IX_Group_Name
+--Name of group should be unique - why common sense 
+CREATE UNIQUE NONCLUSTERED INDEX IX_Group_Name
 ON [Group]
 (
 	[Name]
@@ -58,7 +56,7 @@ GO
 
 --store proc to search name
 
-CREATE OR ALTER Proc Search 
+CREATE OR ALTER Proc usp_Search 
 @Name varchar(128) = '', 
 @Group varchar(128) = '', 
 @PageNumber int = 1, 
@@ -73,7 +71,7 @@ BEGIN
 WITH CTE_Result AS
 (
 	SELECT 
-	p.[Name], p.[DateAdded], g.[Name] as GroupName, p.[Id]
+	p.[Name], p.[DateAdded], g.[Name] as GroupName, p.[Id], g.[Id] as GroupId
 	 FROM
 	[Person] p 
 	Inner Join 
@@ -81,9 +79,9 @@ WITH CTE_Result AS
 	On
 	p.GroupId = g.Id
 	WHERE
-	(p.[Name] is null or p.[Name] like '%'+ @Name + '%') -- this will yeild all results
+	( @Name is null or p.[Name] like '%'+ @Name + '%') -- this will yeild all results
 	AND
-	(g.[Name] is null or g.[Name] like '%'+ @Group + '%') -- this will yeild all results
+	(@Group is null or g.[Name] like '%'+ @Group + '%') -- this will yeild all results
 	
 	ORDER BY  
             CASE WHEN (@SortColumn = 'Name' AND @SortOrder='ASC')  
@@ -113,20 +111,14 @@ WITH CTE_Result AS
 	On
 	p.GroupId = g.Id
 	WHERE
-	(p.[Name]  is null or p.[Name]  like '%'+ @Name + '%')
+	(@Name is null or p.[Name]  like '%'+ @Name + '%')
 	AND
-	(g.[Name]  is null or g.[Name]  like '%'+ @Group + '%') 
+	(@Group is null or g.[Name]  like '%'+ @Group + '%') 
 	)
 
-	SELECT TotalRows, p.[Name], p.[DateAdded], g.[Name] as GroupName, p.[Id] 
+	SELECT t.TotalRows, r.[Name], r.[DateAdded],r.[GroupName], r.[GroupId], r.[Id] 
 	 FROM
-	[Person] p 
-	Inner Join 
-	[Group] g
-	On
-	p.GroupId = g.Id
-	, CTE_TotalRows   
-    WHERE EXISTS (SELECT 1 FROM CTE_Result WHERE CTE_Result.Id = p.Id)  
+	CTE_Result r ,CTE_TotalRows t  
 	  
     OPTION (RECOMPILE)  
 
@@ -174,3 +166,5 @@ GO
 
 
 
+---EF Scaffolding command if needed
+--Scaffold-DBContext "Data Source=.;Initial Catalog=PersonGroups;Integrated Security=True;ConnectRetryCount= 0" Microsoft.EntityFrameworkCore.SQLServer -OutputDir Models -Context PersonGroupsContext -DataAnnotations

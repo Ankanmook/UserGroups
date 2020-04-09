@@ -6,7 +6,8 @@ namespace UseGroup.DataModel
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //one can have a seeder code here
+            Console.WriteLine("Hello Seeder to database for testing and wiping stuff down!");
         }
     }
 }

@@ -8,13 +8,14 @@ namespace UseGroup.DataModel.Models
     public partial class Person
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [StringLength(128)]
         public string Name { get; set; }
         public int GroupId { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }
 
         [ForeignKey(nameof(GroupId))]
         [InverseProperty("Person")]
