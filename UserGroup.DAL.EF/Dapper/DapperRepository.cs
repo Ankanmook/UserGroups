@@ -8,7 +8,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace UserGroup.DAL.Dapper
@@ -118,32 +117,14 @@ namespace UserGroup.DAL.Dapper
             {
                 throw new TimeoutException($"{ GetType().FullName}.WithConnection() experienced a SQL timeout", ex);
             }
-
             catch (SqlException ex)
             {
                 throw ex;
             }
-
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
-
-        public string GetSprocName()
-        {
-            StackTrace stackTrace = new StackTrace();
-
-            foreach (var frame in stackTrace.GetFrames())
-            {
-                var method = frame.GetMethod();
-                var sprocAttr = method.GetCustomAttribute<SprocNameAttribute>();
-                if (sprocAttr != null)
-                {
-                    return sprocAttr.SprocName;
-                }
-            }
-            return "";
         }
     }
 }

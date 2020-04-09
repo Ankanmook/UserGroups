@@ -15,8 +15,7 @@ namespace UserGroup.DAL.EF
 {
     public class SearchRepository : DapperRepository, ISearchRepository
     {
-        public const string SearchPerson_StoreProc = "[dbo].[usp_Search]";
-
+        
         private readonly PersonGroupsContext _context;
 
         public SearchRepository(IConfiguration configuration, PersonGroupsContext context, ILogger<SearchRepository> logger) 
@@ -27,7 +26,8 @@ namespace UserGroup.DAL.EF
 
         public override string ConnectionString => PersonGroupsDbConnectionString;
 
-        [SprocName(SearchPerson_StoreProc)]
+
+        public const string SearchPerson_StoreProc = "[dbo].[usp_Search]";
         public async Task<List<SearchResultDto>> GetSearchResultUsingDapper(string name,
             string group,
             int pageNumber = 1,
@@ -35,7 +35,7 @@ namespace UserGroup.DAL.EF
             SortColumn sortColumn = SortColumn.Name,
             SortOrder sortOrder = SortOrder.Asc)
         {
-            return await GetResultsAsync<SearchResultDto>(GetSprocName(),
+            return await GetResultsAsync<SearchResultDto>(SearchPerson_StoreProc,
             new
             {
                 name,
