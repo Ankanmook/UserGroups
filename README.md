@@ -1,3 +1,6 @@
 # UserGroups
 
-Added NLog Logging 
+NLog
+Entity Framework Core 
+Dapper
+Automapper
