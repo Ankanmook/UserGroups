@@ -44,7 +44,7 @@ namespace UserGroup.Web.Controllers
                 {
                     Total = searchResult.Any() ? searchResult.Count : 0,
                     Results = _mapper.Map<IEnumerable<SearchResultViewModel>>(searchResult),
-                    SearchOption = resourceParameter.SearchOption,
+                    SearchOption = resourceParameter.Option,
                     ResponseTime = timer.ElapsedMilliseconds
                 };
                 return Ok(searchResponse);

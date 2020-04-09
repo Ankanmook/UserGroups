@@ -81,12 +81,12 @@ namespace UserGroup.DAL
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                person.Where(p => p.Name.Contains(name));
+                person.Where(p => p.Name == name);
             }
 
             if (string.IsNullOrWhiteSpace(group))//can restrict user to send group id only
             {
-                person.Where(p => p.Group.Name.Contains(group));
+                person.Where(p => p.Group.Name == group);
             }
 
             if (sortColumn == SearchColumn.Name && sortOrder == SortOrder.Asc)
