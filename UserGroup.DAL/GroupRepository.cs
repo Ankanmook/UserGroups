@@ -4,7 +4,7 @@ using UseGroup.DataModel.Models;
 using UserGroup.Common.Contracts;
 using UserGroup.DataModel.Helpers;
 
-namespace UserGroup.DAL.EF
+namespace UserGroup.DAL
 {
     public class GroupRepository : IGroupRepository
     {

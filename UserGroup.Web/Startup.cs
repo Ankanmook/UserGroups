@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using UseGroup.DataModel.Models;
 using Microsoft.Extensions.Configuration.Json;
 using UserGroup.Common.Contracts;
-using UserGroup.DAL.EF;
+using UserGroup.DAL;
 using UserGroup.Services;
 using AutoMapper;
 using UserGroup.Common;

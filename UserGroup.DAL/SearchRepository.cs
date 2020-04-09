@@ -11,7 +11,7 @@ using UserGroup.Common.DTO;
 using UserGroup.Common.Enums;
 using UserGroup.DAL.Dapper;
 
-namespace UserGroup.DAL.EF
+namespace UserGroup.DAL
 {
     public class SearchRepository : DapperRepository, ISearchRepository
     {

@@ -2,7 +2,7 @@
 using UseGroup.DataModel.Models;
 using UserGroup.DataModel.Helpers;
 
-namespace UserGroup.Services
+namespace UserGroup.Common.Contracts
 {
     public interface IGroupService
     {

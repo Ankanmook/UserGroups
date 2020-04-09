@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UserGroup.Common.DTO;
 using UserGroup.Common.Helper;
 
-namespace UserGroup.Services
+namespace UserGroup.Common.Contracts
 {
     public interface ISearchService
     {
