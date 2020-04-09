@@ -79,9 +79,9 @@ WITH CTE_Result AS
 	On
 	p.GroupId = g.Id
 	WHERE
-	(p.[Name] is null or p.[Name] like '%'+ @Name + '%') -- this will yeild all results
+	( @Name is null or p.[Name] like '%'+ @Name + '%') -- this will yeild all results
 	AND
-	(g.[Name] is null or g.[Name] like '%'+ @Group + '%') -- this will yeild all results
+	(@Group is null or g.[Name] like '%'+ @Group + '%') -- this will yeild all results
 	
 	ORDER BY  
             CASE WHEN (@SortColumn = 'Name' AND @SortOrder='ASC')  
@@ -111,20 +111,14 @@ WITH CTE_Result AS
 	On
 	p.GroupId = g.Id
 	WHERE
-	(p.[Name]  is null or p.[Name]  like '%'+ @Name + '%')
+	(@Name is null or p.[Name]  like '%'+ @Name + '%')
 	AND
-	(g.[Name]  is null or g.[Name]  like '%'+ @Group + '%') 
+	(@Group is null or g.[Name]  like '%'+ @Group + '%') 
 	)
 
-	SELECT TotalRows, p.[Name], p.[DateAdded], g.[Name] as GroupName, g.[Id] as GroupId, p.[Id] 
+	SELECT t.TotalRows, r.[Name], r.[DateAdded],r.[GroupName], r.[GroupId], r.[Id] 
 	 FROM
-	[Person] p 
-	Inner Join 
-	[Group] g
-	On
-	p.GroupId = g.Id
-	, CTE_TotalRows   
-    WHERE EXISTS (SELECT 1 FROM CTE_Result WHERE CTE_Result.Id = p.Id)  
+	CTE_Result r ,CTE_TotalRows t  
 	  
     OPTION (RECOMPILE)  
 
