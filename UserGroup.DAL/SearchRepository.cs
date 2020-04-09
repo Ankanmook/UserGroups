@@ -63,30 +63,37 @@ namespace UserGroup.DAL
         /// Excecutes the search result using EF
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="group"></param>
+        /// <param name="groupName"></param>
         /// <param name="pageNumber"></param>
         /// <param name="pageSize"></param>
         /// <param name="sortColumn"></param>
         /// <param name="sortOrder"></param>
         /// <returns></returns>
         public List<SearchResultDto> GetSearchResultUsingEFCore(string name,
-        string group,
+        string groupName,
         int pageNumber = 1,
         int pageSize = 100,
         SearchColumn sortColumn = SearchColumn.Name,
         SortOrder sortOrder = SortOrder.Asc)
         {
-            var person = _context.Person.Include(p => p.Group);
+            var person = from p in _context.Person.Include(p => p.Group)
+                         select p;
 
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                person.Where(p => p.Name == name);
+                name = $"%{name.ToLower()}%";
+                person = from p in person
+                where EF.Functions.Like(p.Name.ToLower(), name)
+                select p;
             }
 
-            if (string.IsNullOrWhiteSpace(group))//can restrict user to send group id only
+            if (!string.IsNullOrWhiteSpace(groupName))//can restrict user to send group id only
             {
-                person.Where(p => p.Group.Name == group);
+                groupName = $"%{groupName.ToLower()}%";
+                person = from p in person
+                where EF.Functions.Like(p.Group.Name.ToLower(), groupName)
+                select p;
             }
 
             if (sortColumn == SearchColumn.Name && sortOrder == SortOrder.Asc)
