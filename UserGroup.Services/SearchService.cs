@@ -16,7 +16,7 @@ namespace UserGroup.Services
             _searchRepository = searchRepository;
         }
 
-        public async Task<List<SearchResultDto>> GetSearchResult(SearchResourceParameter resourceParameter)
+        public async Task<List<SearchResultDto>> Get(SearchResourceParameter resourceParameter)
         {
             if (resourceParameter.SearchOption == SearchOption.EF)
             {

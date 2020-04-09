@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using UseGroup.DataModel.Models;
+using UserGroup.Web.Models;
 
 namespace UserGroup.Web.Profiles
 {
@@ -14,6 +15,8 @@ namespace UserGroup.Web.Profiles
             CreateMap<Group, Common.DTO.GroupDto>().ReverseMap();
             CreateMap<Group, Common.DTO.GroupCreationDto>().ReverseMap();
             CreateMap<Group, Common.DTO.GroupUpdateDto>().ReverseMap();//redundant
+
+            CreateMap<SearchResultViewModel, Common.DTO.SearchResultDto>().ReverseMap();
         }
     }
 }

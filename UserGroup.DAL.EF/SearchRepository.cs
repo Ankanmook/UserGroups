@@ -28,6 +28,17 @@ namespace UserGroup.DAL.EF
 
 
         public const string SearchPerson_StoreProc = "[dbo].[usp_Search]";
+
+        /// <summary>
+        /// Executes the search result using stored procedure usp_search and dapper
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="group"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="sortColumn"></param>
+        /// <param name="sortOrder"></param>
+        /// <returns></returns>
         public async Task<List<SearchResultDto>> GetSearchResultUsingDapper(string name,
             string group,
             int pageNumber = 1,
@@ -47,6 +58,17 @@ namespace UserGroup.DAL.EF
             });
         }
 
+
+        /// <summary>
+        /// Excecutes the search result using EF
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="group"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="sortColumn"></param>
+        /// <param name="sortOrder"></param>
+        /// <returns></returns>
         public List<SearchResultDto> GetSearchResultUsingEFCore(string name,
         string group,
         int pageNumber = 1,

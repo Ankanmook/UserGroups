@@ -7,6 +7,6 @@ namespace UserGroup.Services
 {
     public interface ISearchService
     {
-        Task<List<SearchResultDto>> GetSearchResult(SearchResourceParameter resourceParameter);
+        Task<List<SearchResultDto>> Get(SearchResourceParameter resourceParameter);
     }
 }

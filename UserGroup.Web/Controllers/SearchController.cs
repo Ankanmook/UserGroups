@@ -36,7 +36,7 @@ namespace UserGroup.Web.Controllers
             {
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
-                var searchResult = await _searchService.GetSearchResult(resourceParameter);
+                var searchResult = await _searchService.Get(resourceParameter);
                 timer.Stop();
 
                 var searchResponse = new SearchViewModel()
