@@ -43,7 +43,7 @@ namespace UserGroup.DAL
             string group,
             int pageNumber = 1,
             int pageSize = 100,
-            SortColumn sortColumn = SortColumn.Name,
+            SearchColumn sortColumn = SearchColumn.Name,
             SortOrder sortOrder = SortOrder.Asc)
         {
             return await GetResultsAsync<SearchResultDto>(SearchPerson_StoreProc,
@@ -73,7 +73,7 @@ namespace UserGroup.DAL
         string group,
         int pageNumber = 1,
         int pageSize = 100,
-        SortColumn sortColumn = SortColumn.Name,
+        SearchColumn sortColumn = SearchColumn.Name,
         SortOrder sortOrder = SortOrder.Asc)
         {
             var person = _context.Person.Include(p => p.Group);
@@ -89,22 +89,22 @@ namespace UserGroup.DAL
                 person.Where(p => p.Group.Name.Contains(group));
             }
 
-            if (sortColumn == SortColumn.Name && sortOrder == SortOrder.Asc)
+            if (sortColumn == SearchColumn.Name && sortOrder == SortOrder.Asc)
             {
                 person.OrderBy(p => p.Name).ThenBy(p => p.Group);
             }
 
-            if (sortColumn == SortColumn.Group && sortOrder == SortOrder.Asc)
+            if (sortColumn == SearchColumn.Group && sortOrder == SortOrder.Asc)
             {
                 person.OrderBy(p => p.Group).ThenBy(p => p.Name);
             }
 
-            if (sortColumn == SortColumn.Name && sortOrder == SortOrder.Desc)
+            if (sortColumn == SearchColumn.Name && sortOrder == SortOrder.Desc)
             {
                 person.OrderByDescending(p => p.Group).ThenBy(p => p.Name);
             }
 
-            if (sortColumn == SortColumn.Group && sortOrder == SortOrder.Desc)
+            if (sortColumn == SearchColumn.Group && sortOrder == SortOrder.Desc)
             {
                 person.OrderByDescending(p => p.Group).ThenBy(p => p.Name);
             }

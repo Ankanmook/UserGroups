@@ -10,8 +10,8 @@ namespace UserGroup.Common.Contracts
 {
     public interface ISearchRepository
     {
-        Task<List<SearchResultDto>> GetSearchResultUsingDapper(string name, string group, int pageNumber = 1, int pageSize = 20, SortColumn sortColumn = SortColumn.Name, SortOrder sortOrder = SortOrder.Asc);
+        Task<List<SearchResultDto>> GetSearchResultUsingDapper(string name, string group, int pageNumber = 1, int pageSize = 20, SearchColumn sortColumn = SearchColumn.Name, SortOrder sortOrder = SortOrder.Asc);
 
-        List<SearchResultDto> GetSearchResultUsingEFCore(string name, string group, int pageNumber = 1, int pageSize = 20, SortColumn sortColumn = SortColumn.Name, SortOrder sortOrder = SortOrder.Asc);
+        List<SearchResultDto> GetSearchResultUsingEFCore(string name, string group, int pageNumber = 1, int pageSize = 20, SearchColumn sortColumn = SearchColumn.Name, SortOrder sortOrder = SortOrder.Asc);
     }
 }

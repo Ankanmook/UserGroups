@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using UserGroup.Common.Helper;
 using UserGroup.Web.Models;
 using UserGroup.Common.Contracts;
+using UserGroup.Common.Enums;
 
 namespace UserGroup.Web.Controllers
 {
@@ -54,5 +55,32 @@ namespace UserGroup.Web.Controllers
                 return StatusCode(500, "A problem happened while handling your request");
             }
         }
+
+        [HttpGet("options")]
+        public IActionResult Options()
+        {
+            var searchOptions = (SearchOption[])Enum.GetValues(typeof(SearchOption));
+            var searchOption = from value in searchOptions
+                               select new { value = (int)value, name = value.ToString() };
+
+            var sortOrders = (SortOrder[])Enum.GetValues(typeof(SortOrder));
+            var sortOption = from value in sortOrders
+                             select new { value = (int)value, name = value.ToString() };
+
+            var searchColumns = (SearchColumn[])Enum.GetValues(typeof(SearchColumn));
+            var searchColumn = from value in searchColumns
+                               select new { name = value.ToString() };
+
+            return Ok(
+                new
+                {
+                    Description = "Options provided for searching",
+                    Search = searchOption,
+                    SearchColumn = searchColumn,
+                    Sort = sortOption,
+                });
+        }
     }
+
+
 }

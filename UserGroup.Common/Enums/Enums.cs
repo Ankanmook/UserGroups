@@ -6,7 +6,7 @@
         Desc = 1
     }
 
-    public enum SortColumn
+    public enum SearchColumn
     {
         Name,
         Group
