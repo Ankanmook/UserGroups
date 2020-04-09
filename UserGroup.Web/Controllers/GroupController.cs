@@ -28,7 +28,7 @@ namespace UserGroup.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(ResourceParameters resourceParameters)
+        public IActionResult Get([FromQuery] ResourceParameters resourceParameters)
         {
             return Ok(_mapper.Map<IEnumerable<GroupDto>>(_groupService.Get(resourceParameters)));
         }

@@ -30,7 +30,7 @@ namespace UserGroup.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(SearchResourceParameter resourceParameter)
+        public async Task<IActionResult> Get([FromQuery] SearchResourceParameter resourceParameter)
         {
             try
             {
