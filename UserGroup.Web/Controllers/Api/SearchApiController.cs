@@ -15,13 +15,13 @@ namespace UserGroup.Web.Controllers
 {
     [ApiController]
     [Route("api/search")]
-    public class SearchController : Controller
+    public class SearchApiController : Controller
     {
-        private ILogger<SearchController> _logger;
+        private ILogger<SearchApiController> _logger;
         private ISearchService _searchService;
         private readonly IMapper _mapper;
 
-        public SearchController(ILogger<SearchController> logger,
+        public SearchApiController(ILogger<SearchApiController> logger,
             ISearchService searchService,
             IMapper mapper)
         {
