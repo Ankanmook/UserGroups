@@ -1,0 +1,20 @@
+﻿@page "{personId:int}"
+@model UserGroup.Web.Pages.Person.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h2>@Model.Person.Name</h2>
+<div>
+    Id: @Model.Person.Id
+</div>
+<div>
+    Group: @Model.Person.GroupName
+</div>
+<div>
+    Date Added: @Model.Person.GroupName
+</div>
+
+<a asp-page="./List" class="btn btn-outline-primary">All Persons</a>
+
