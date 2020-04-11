@@ -72,6 +72,10 @@ namespace UserGroup.Web.Pages.Person
 
             if (Person.Id > 0)
             {
+                if (!_personService.Exists(Person.Id))
+                {
+                    return RedirectToPage("./NotFound");
+                }
                 _personService.Update(personToUpsert);
             }
             else
