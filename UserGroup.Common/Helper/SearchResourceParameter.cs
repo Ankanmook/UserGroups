@@ -8,5 +8,6 @@ namespace UserGroup.Common.Helper
         public SearchOption Option { get; set; } = SearchOption.Dapper;//set to default
         public string Name { get; set; }
         public string Group { get; set; }
+        public int GroupId { get; set; }
     }
 }
