@@ -18,6 +18,7 @@ using AutoMapper;
 using UserGroup.Common;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using UserGroup.Web.Helpers;
 
 namespace UserGroup.Web
 {
@@ -74,12 +75,14 @@ namespace UserGroup.Web
             //app.UseMvc();
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                RequestPath = "/lib",
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules/"))
-            });
+            app.UseStaticFiles();
+            //(new StaticFileOptions()
+            //{
+            //    RequestPath = "/lib",
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules/"))
+            //});
 
+            app.UseNodeModules();
 
             app.UseRouting();
 
