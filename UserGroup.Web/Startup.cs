@@ -13,7 +13,6 @@ namespace UserGroup.Web
 {
     public class Startup
     {
-        //public IConfiguration Configuration { get; }
         private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
@@ -54,17 +53,10 @@ namespace UserGroup.Web
                 app.UseHsts();
             }
 
-            //app.UseMvc();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //(new StaticFileOptions()
-            //{
-            //    RequestPath = "/lib",
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules/"))
-            //});
-
-            app.UseNodeModules();
+            app.UseNodeModules(); //Configures and adds static file middleware to serve files directly from the node_modules
 
             app.UseRouting();
 
@@ -72,9 +64,7 @@ namespace UserGroup.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages()
-
-                ;
+                endpoints.MapRazorPages();
 
                 //endpoints.MapControllerRoute(
                 //    name: "default",
