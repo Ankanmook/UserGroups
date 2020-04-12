@@ -46,7 +46,7 @@ namespace UserGroup.Web.Pages.Person
 
         public void OnGet()
         {
-            r pagePersons = _mapper.Map<IEnumerable<PersonDto>>(_personService.Get(SearchResourceParameter));
+            Persons = _mapper.Map<IEnumerable<PersonDto>>(_personService.Get(SearchResourceParameter));
             Groups = new SelectList(_groupService.Get().Select(s=>s.Name).ToList());
         }
     }
