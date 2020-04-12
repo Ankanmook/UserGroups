@@ -11,27 +11,42 @@
 
 @section Scripts {
 
-    <script src="~/node_modules/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="~/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-    <link href="~/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" />
-    
-        <script>
-                $(function () {
-          
-                    $.ajax("/api/person/",
-                        { method: "get" })
-                        .then(function (response) {
-                            $("#persons").dataTable({
-                                data: response,
-                                columns: [
-                                    { "data": "name" },
-                                    { "data": "dateAdded" },
-                                    { "data": "groupName" },
-                                ]
-                            });
-                        });
+
+        <script src="~/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+        <script src="~/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+        <link href="~/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <script>
+        $(function () {
+
+            $.ajax("/api/person/",
+                { method: "get" })
+                .then(function (response) {
+                    $("#persons").dataTable({
+                        data: response,
+                        columns: [
+                            { "data": "name" },
+                            { "data": "dateAdded" },
+                            { "data": "groupName" },
+                        ]
+                    });
                 });
+        });
 
 
-        </script>
+    </script>
+
+
+<style>
+    /*sad to do it here but then could have worked out somewhere else as weel*/
+    /*override for bootstrap*/
+    .form-inline {
+        display: block;
+    }
+
+    /*override for footer*/
+    .footer {
+        position: relative;
+    }
+</style>
 }
