@@ -9,7 +9,7 @@ namespace UserGroup.Web.Helpers
 {
     public static class ServiceInjector
     {
-        public static void AddConfiguredService(IServiceCollection services)
+        public static void Inject(IServiceCollection services)
         {
             ConfigureRepositories(services);
             ConfigureServiceLayer(services);

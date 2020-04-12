@@ -37,7 +37,7 @@ namespace UserGroup.Web
              });
 
             ConfigureDbContext(services);
-            ServiceInjector.AddConfiguredService(services);
+            ServiceInjector.Inject(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
