@@ -65,6 +65,7 @@ namespace UserGroup.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
 
                 //endpoints.MapControllerRoute(
                 //    name: "default",
