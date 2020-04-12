@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Person using JQuery Datatable</h1>
+<h2>Person using JQuery Datatable</h2>
 
 <table class="table" id="persons">
 </table>
@@ -15,23 +15,23 @@
     <script src="~/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
     <link href="~/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" />
     
-<script>
-        $(function () {
+        <script>
+                $(function () {
           
-            $.ajax("/api/person/",
-                { method: "get" })
-                .then(function (response) {
-                    $("#persons").dataTable({
-                        data: response,
-                        columns: [
-                            { "data": "name" },
-                            { "data": "dateAdded" },
-                            { "data": "groupName" },
-                        ]
-                    });
+                    $.ajax("/api/person/",
+                        { method: "get" })
+                        .then(function (response) {
+                            $("#persons").dataTable({
+                                data: response,
+                                columns: [
+                                    { "data": "name" },
+                                    { "data": "dateAdded" },
+                                    { "data": "groupName" },
+                                ]
+                            });
+                        });
                 });
-        });
 
 
-    </script>
+        </script>
 }
