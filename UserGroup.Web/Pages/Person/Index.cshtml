@@ -16,7 +16,7 @@
         <script src="~/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
         <link href="~/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" />
 
-    <script>
+        <script>
         $(function () {
 
             $.ajax("/api/person/",
@@ -25,16 +25,42 @@
                     $("#persons").dataTable({
                         data: response,
                         columns: [
-                            { "data": "name" },
-                            { "data": "dateAdded" },
-                            { "data": "groupName" },
+                            { "title": "Name", "data": "name" },
+                            { "title": "Date Added", "data": "dateAdded" },
+                            { "title": "Group", "data": "groupName" },
+                            {
+                                "title": "Detail",
+                                "data": "id",
+                                "sortable": false,
+                                "render": function (data, type, full, meta) {
+                                    return '<a href="@Url.Action("Detail", "Person/Details")?personId=' + data + '">Detail</a>';
+                                }
+                            },
+                            {
+                                "title": "Edit",
+                                "data": "id",
+                                "sortable": false,
+                                "render": function (data, type, full, meta) {
+                                    return '<a href="@Url.Action("Edit", "Person/Edit")?personId=' + data + '"">Edit</a>';
+
+                                }
+                            },
+                            {
+                                "title": "Delete",
+                                "data": "id",
+                                "sortable": false,
+                                "render": function (data, type, full, meta) {
+                                    return '<a href="@Url.Action("Delete", "Person/Delete")?personId=' + data + '"">Delete</a>';
+
+                                }
+                            }
                         ]
                     });
                 });
         });
 
 
-    </script>
+        </script>
 
 
 <style>
