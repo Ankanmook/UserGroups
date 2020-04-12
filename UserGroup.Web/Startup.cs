@@ -16,6 +16,8 @@ using UserGroup.DAL;
 using UserGroup.Services;
 using AutoMapper;
 using UserGroup.Common;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace UserGroup.Web
 {
@@ -57,7 +59,7 @@ namespace UserGroup.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,7 +74,12 @@ namespace UserGroup.Web
             //app.UseMvc();
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                RequestPath = "/lib",
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules/"))
+            });
+
 
             app.UseRouting();
 
@@ -81,7 +88,7 @@ namespace UserGroup.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages()
-                
+
                 ;
 
                 //endpoints.MapControllerRoute(
