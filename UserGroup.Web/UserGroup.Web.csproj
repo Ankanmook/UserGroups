@@ -6,6 +6,15 @@
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
+  <Target Name="PostBuild" AfterTargets="ComputeFilesToPublish">
+    <Exec Architecture="npm install"></Exec>
+  </Target>
+
+  <ItemGroup>
+    <Content Include="node_modules/**" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  
   <ItemGroup>
     <Compile Remove="Helper\**" />
     <Content Remove="Helper\**" />
