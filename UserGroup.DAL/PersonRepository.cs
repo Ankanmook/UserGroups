@@ -74,5 +74,10 @@ namespace UserGroup.DAL
         {
             _context.Person.Remove(person);
         }
+
+        public int GetCount()
+        {
+            return _context.Person.Count();
+        }
     }
 }

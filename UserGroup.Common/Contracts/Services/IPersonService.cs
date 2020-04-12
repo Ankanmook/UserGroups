@@ -6,6 +6,7 @@ namespace UserGroup.Common.Contracts
 {
     public interface IPersonService
     {
+        int GetCount();
         IEnumerable<Person> Get(ResourceParameters resourceParameters);
 
         Person Get(int id);
@@ -19,7 +20,6 @@ namespace UserGroup.Common.Contracts
         void Update(Person person);
 
         void Delete(Person person);
-
         bool Save();
     }
 }

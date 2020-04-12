@@ -16,6 +16,11 @@ namespace UserGroup.Services
             _groupService = groupService;
         }
 
+        public int GetCount()
+        {
+            return _personRepository.GetCount();
+        }
+
         public IEnumerable<Person> Get(ResourceParameters resourceParameters)
         {
             return _personRepository.Get(resourceParameters, true);
