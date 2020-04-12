@@ -7,5 +7,7 @@
     {
         public const string DbConnectionString = "PersonGroupsDbconnectionString";
         public const string DataAccessLogTime = "DataAccessLogTime";
+
+        public const string All = "All";
     }
 }

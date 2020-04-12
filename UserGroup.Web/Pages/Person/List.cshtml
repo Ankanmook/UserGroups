@@ -1,4 +1,6 @@
-﻿@page
+﻿@using UserGroup.Common
+
+@page
 @model UserGroup.Web.Pages.Person.ListModel
 @{
     ViewData["Title"] = "List";
@@ -11,8 +13,8 @@
         <div class="input-group">
             <input type="search" class="form-control" asp-for="SearchResourceParameter.Name" />
 
-            <select asp-for="SearchResourceParameter.GroupId" asp-items="Model.Groups">
-                <option value="">All</option>
+            <select asp-for="SearchResourceParameter.Group" asp-items="Model.Groups">
+                <option value="">@Constants.All</option>
             </select>
 
             <span class="input-group-btn">
