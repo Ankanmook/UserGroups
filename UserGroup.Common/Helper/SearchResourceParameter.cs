@@ -24,27 +24,27 @@ namespace UserGroup.Common.Helper
         }
         public int GroupId { get; set; }
 
-        public string SortOrder { get; set; }
+        public string AscDesc { get; set; }
         public SortOrder SortOrderOption { 
             get 
             {
-                if(string.IsNullOrWhiteSpace(SortOrder))
+                if(string.IsNullOrWhiteSpace(AscDesc))
                 {
                     return Enums.SortOrder.Asc;
                 }
                 else
                 {
-                    if(SortOrder == "Asc")
+                    if(AscDesc == "Asc")
                     {
-                        return Enums.SortOrder.Asc;
+                        return SortOrder.Asc;
                     }
-                    if (SortOrder == "Desc")
+                    if (AscDesc == "Desc")
                     {
-                        return Enums.SortOrder.Desc;
+                        return SortOrder.Desc;
                     }
                     else
                     {
-                        return Enums.SortOrder.Asc;
+                        return SortOrder.Asc;
                     }
                 }
 
@@ -58,26 +58,26 @@ namespace UserGroup.Common.Helper
             {
                 if (string.IsNullOrWhiteSpace(SortBy))
                 {
-                    return Enums.SortColumn.DateAdded;
+                    return SortColumn.DateAdded;
                 }
                 else
                 {
                     if (SortBy == "Name")
                     {
-                        return Enums.SortColumn.DateAdded;
+                        return SortColumn.DateAdded;
 
                     }
                     else if (SortBy == "DateAdded")
                     {
-                        return Enums.SortColumn.DateAdded;
+                        return SortColumn.DateAdded;
                     }
                     else if (SortBy == "Group")
                     {
-                        return Enums.SortColumn.Group;
+                        return SortColumn.Group;
                     }
                     else
                     {
-                        return Enums.SortColumn.DateAdded;
+                        return SortColumn.DateAdded;
                     }
                 }
             }

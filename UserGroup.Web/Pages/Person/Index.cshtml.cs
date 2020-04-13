@@ -82,7 +82,7 @@ namespace UserGroup.Web.Pages.Person
                 PageNumber = CurrentPage,
                 PageSize = PageSize,
                 SortBy = SortBy,
-                SortOrder = SortOrder,
+                AscDesc = SortOrder,
                 Option = SearchOption,
                 Name = Name,
                 Group = GroupName
