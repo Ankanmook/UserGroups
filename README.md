@@ -13,7 +13,7 @@ npm install
 
 Database
 1.The database was built using SQL script and then EF scaffolding was done to generate the model which resides in UserGroup.DataModel along with Context
-2.Database script in UserGroup.Sql => Creat.sql. It is idempotent (will delete and recreate DB (provided you don't have existing connection to db)
+2.Database script in UserGroup.Sql => Creat.sql. It is idempotent (will delete and recreate DB (provided you don't have active connection to db)
 3.Database backup is in the same folder
 4.Database also contains search stored procedure and seeding of 2 groups and 5 person
 
