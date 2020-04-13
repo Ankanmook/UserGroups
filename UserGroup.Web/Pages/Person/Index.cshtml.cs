@@ -47,6 +47,8 @@ namespace UserGroup.Web.Pages.Person
 
         public async Task<IActionResult> OnGet()
         {
+            
+
             try
             {
                 Stopwatch timer = new Stopwatch();

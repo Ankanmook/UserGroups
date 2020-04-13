@@ -15,6 +15,6 @@
     public enum SearchOption
     {
         Dapper = 0, //Default 
-        EF = 1,
+        EntityFramework = 1,
     }
 }
