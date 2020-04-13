@@ -32,7 +32,7 @@ namespace UserGroup.Web
             services.AddMvc()
             .AddRazorPagesOptions(options =>
              {
-                 options.Conventions.AddPageRoute("/Person/List", "");
+                 options.Conventions.AddPageRoute("/Home", "");
              });
 
             ConfigureDbContext(services);
