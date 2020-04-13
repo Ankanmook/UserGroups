@@ -8,17 +8,27 @@
 <h1>@Model.Person.Name Details</h1>
 
 <div>
-    <h4>Person</h4>
-    <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Person.Name)
+        <dt class="col-sm-4">
+            Name
         </dt>
-        <dd class="col-sm-2">
-            @Html.DisplayFor(model => model.Person.GroupName)
+        <dd class="col-sm-4">
+            Group
         </dd>
-        <dt class="col-sm-8">
-            @Html.DisplayNameFor(model => model.Person.DateAdded)
+        <dt class="col-sm-4">
+            Date Added
+        </dt>
+    </dl>
+
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Model.Person.Name
+        </dt>
+        <dd class="col-sm-4">
+            @Model.Person.GroupName
+        </dd>
+        <dt class="col-sm-4">
+            @Model.Person.DateAdded
         </dt>
     </dl>
 
