@@ -14,17 +14,21 @@ using UserGroup.Common.Enums;
 using UserGroup.Common.Helper;
 using UserGroup.Web.Controllers;
 
+
 namespace UserGroup.Web.Pages.Person
 {
-    public class IndexModel : PageModel
+  
+    public class PaginationModel : PageModel
     {
-        private ILogger<IndexModel> _logger;
+
+        private ILogger<PaginationModel> _logger;
         private ISearchService _searchService;
         private readonly IGroupService _groupService;
         private readonly IHtmlHelper _htmlHelper;
         private readonly IMapper _mapper;
 
-        public IndexModel(ILogger<IndexModel> logger,
+
+        public PaginationModel(ILogger<PaginationModel> logger,
             ISearchService searchService,
              IGroupService groupService,
              IHtmlHelper htmlHelper,
@@ -37,85 +41,70 @@ namespace UserGroup.Web.Pages.Person
             _mapper = mapper ?? throw new ArgumentException(nameof(_mapper));
         }
 
-        [BindProperty(SupportsGet = true)]
-        public SearchResourceParameter SearchResourceParameter { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 1;
+        [BindProperty(SupportsGet = true)]
+        public string SortBy { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public SortOrder SortOrder { get; set; }
+
+
+        [BindProperty(SupportsGet = true)]
+        public string Name { get; set; } 
+        [BindProperty(SupportsGet = true)]
+        public string GroupName { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public SearchOption SearchOption { get; set; }
+
+
+        public int Count { get; set; }
+        public int PageSize { get; set; } = 5;
+
+        public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
+
+        public bool ShowPrevious => CurrentPage > 1;
+        public bool ShowNext => CurrentPage < TotalPages;
+        public bool ShowFirst => CurrentPage != 1;
+        public bool ShowLast => CurrentPage != TotalPages;
+
+        public IEnumerable<SearchResultDto> Data { get; set; }
+        public long ResponseTime { get; set; }
         public IEnumerable<SelectListItem> Groups { get; private set; }
         public IEnumerable<SelectListItem> SearchOptions { get; private set; }
 
-        public SearchViewModel Persons { get; set; }
 
-        public async Task<IActionResult> OnGet(string sortOrder,
-            string currentFilter,
-            string searchString,
-            int? pageNumber)
+        public async Task OnGetAsync()
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewData["GroupSortParm"] = sortOrder == "Group" ? "group_desc" : "Group";
+            //name => name
+            //group => group
+            
+            //sort order => name group date added
 
-            try
+            var searchResourceParameter = new SearchResourceParameter()
             {
-                //var SearchResourceParameter = new SearchResourceParameter()
-                //{
-                //    Name = currentFilter,
-                //    PageNumber = pageNumber.HasValue ? pageNumber.Value : 0,
-                    
-                //};
+                PageNumber = CurrentPage,
+                PageSize = PageSize,
+                SortColumn = SortBy,
+                SortOrder = SortOrder,
+                Option = SearchOption,
+                Name = Name,
+                Group = GroupName
+            };
 
-                Stopwatch timer = new Stopwatch();
-                timer.Start();
-                var searchResult = await _searchService.Get(SearchResourceParameter);
-                timer.Stop();
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+            var searchResult = await _searchService.Get(searchResourceParameter);
+            timer.Stop();
 
-                Persons = new SearchViewModel()
-                {
-                    Total = searchResult.Any() ? searchResult.Count : 0,
-                    PageNumber = SearchResourceParameter.PageNumber,
-                    Results = searchResult,
-                    ResponseTime = timer.ElapsedMilliseconds,
-                };
+            Data = searchResult;
+            Count = searchResult.Any() ? searchResult.First().TotalRows : 0;
+            ResponseTime = timer.ElapsedMilliseconds;
 
-                Groups = new SelectList(_groupService.Get().Select(s => s.Name).ToList());
-                SearchOptions = _htmlHelper.GetEnumSelectList<SearchOption>();
-
-                return Page();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical($"Exception happened searching person", ex);
-                return StatusCode(500, "A problem happened while handling your request");
-            }
+            Groups = new SelectList(_groupService.Get().Select(s => s.Name).ToList());
+            SearchOptions = _htmlHelper.GetEnumSelectList<SearchOption>();
         }
     }
-    
-    //this needs renamind
-    public class SearchViewModel
-    {
-        public int Total { get; set; }
-        public int PageNumber { get; set; }
 
-        public long ResponseTime { get; set; }
-        public IEnumerable<SearchResultDto> Results { get; set; }
-
-        
-
-        public bool HasPreviousPage
-        {
-            get
-            {
-                return (PageNumber > 1);
-            }
-        }
-
-        public bool HasNextPage
-        {
-            get
-            {
-                return (PageNumber < Total);
-            }
-        }
-
-    }
 }

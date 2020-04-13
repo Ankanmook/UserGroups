@@ -1,103 +1,98 @@
-﻿@page
-@model UserGroup.Web.Pages.Person.IndexModel
+﻿@page "{currentpage=1}/{sortby=Name}"
+
 @using UserGroup.Common
+
+@model UserGroup.Web.Pages.Person.PaginationModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pagination";
 }
 
-<h1>Index</h1>
+    <h1>Pagination &amp; Filtering</h1>
 
 
-<p>
-    <a asp-page="./Edit" class="btn btn-outline-primary">Add New</a>
-</p>
 
 <div>
     <span class="font-weight-bold">Elapsed Response Time (milliseconds): </span>
-    <span>@Model.Persons.ResponseTime</span>
+    <span>@Model.ResponseTime</span>
 </div>
 <br />
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
             Name:
-            <input type="text" asp-for="SearchResourceParameter.Name" /> |
+            <input type="text" asp-for="Name" /> |
             Group:
-            <select asp-for="SearchResourceParameter.Group" 
+            <select asp-for="GroupName"
                     asp-items="Model.Groups">
                 <option value="">@Constants.All</option>
             </select> |
             Search Option:
-            <select asp-for="SearchResourceParameter.Option" 
+            <select asp-for="SearchOption"
                     asp-items="Model.SearchOptions">
             </select> |
             <input type="submit" value="Search" class="btn btn-default" /> |
             @*<span class="input-group-btn">
-                <button class="btn">
-                    <i class="fas fa-search"></i>
-                </button>
-            </span> |*@
+                    <button class="btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </span> |*@
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
 </form>
 
-
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Name</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">DateAdded</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GroupSortParm"]">Group</a>
-            </th>
-            <th></th>
+            <th><a asp-page="./pagination" class="sort-link" asp-route-sortby="Name">Name</a></th>
+            <th><a asp-page="./pagination" class="sort-link" asp-route-sortby="DateAdded">Date Added</a></th>
+            <th><a asp-page="./pagination" class="sort-link" asp-route-sortby="Group">Group</a></th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
+
     <tbody>
-        @foreach (var person in Model.Persons.Results)
+        @foreach (var item in Model.Data)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => person.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => person.DateAdded)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => person.GroupName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@person.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@person.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@person.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.DateAdded</td>
+            <td>@item.GroupName</td>
+            <td><a class="btn btn-lg" asp-page="./Details"  asp-route-personId="@item.Id">  <i class="fa fa-search-plus"></i> </a></td>
+            <td><a class="btn btn-lg" asp-page="./Edit"  asp-route-personId="@item.Id">  <i class="fa fa-edit"></i> </a></td> 
+            <td><a class="btn btn-lg" asp-page="./Delete" asp-route-personId="@item.Id">  <i class="fa fa-trash"></i> </a></td>
+        </tr>
         }
     </tbody>
 </table>
+<div>
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./pagination" asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>
 
-@{
-    var prevDisabled = !Model.Persons.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.Persons.HasNextPage ? "disabled" : "";
-}
+<div>
+    <ul class="pagination">
+        <li class="page-item @(!Model.ShowFirst? "disabled":"")" title="First">
+            <a asp-page="./pagination" asp-all-route-data="@(new Dictionary<string, string>{ { "currentpage", "1" },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-fast-backward"></i></a>
+        </li>
 
+        <li class="page-item @(!Model.ShowPrevious? "disabled":"")" title="Previous">
+            <a asp-page="./pagination" asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage -1).ToString() },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-step-backward"></i></a>
+        </li>
+        <li class="page-item  @(!Model.ShowNext? "disabled":"")" title="Next">
+            <a asp-page="./pagination" asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage + 1).ToString() },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-step-forward"></i></a>
+        </li>
 
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.SearchResourceParameter.PageNumber - 1)"
-   asp-route-currentFilter="@Model.SearchResourceParameter.Name"
-   class="btn btn-default @prevDisabled">
-    Previous
-</a>
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.SearchResourceParameter.PageNumber + 1)"
-   asp-route-currentFilter="@Model.SearchResourceParameter.Name"
-   class="btn btn-default @nextDisabled">
-    Next
-</a>
+        <li class="page-item  @(!Model.ShowLast? "disabled":"")" title="Last">
+            <a asp-page="./pagination" asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", Model.TotalPages.ToString() },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-fast-forward"></i></a>
+        </li>
+    </ul>
+</div>
