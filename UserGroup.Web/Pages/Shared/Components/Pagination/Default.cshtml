@@ -1,0 +1,36 @@
+﻿@model UserGroup.Web.Models.PaginationViewModel
+
+<div>
+    <ul class="pagination">
+        <li class="page-item @(!Model.ShowFirst? "disabled":"")" title="First">
+            <a asp-page="./index"
+               asp-all-route-data="@(new Dictionary<string, string>{ { "currentpage", "1" },{ "sortby", Model.SortBy }})"
+               class="page-link">
+                <i class="fas fa-fast-backward"></i>
+            </a>
+        </li>
+
+        <li class="page-item @(!Model.ShowPrevious? "disabled":"")" title="Previous">
+            <a asp-page="./index"
+               asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage -1).ToString() },{ "sortby", Model.SortBy }})"
+               class="page-link">
+                <i class="fas fa-step-backward"></i>
+            </a>
+        </li>
+        <li class="page-item  @(!Model.ShowNext? "disabled":"")" title="Next">
+            <a asp-page="./index"
+               asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage + 1).ToString() },{ "sortby", Model.SortBy }})"
+               class="page-link">
+                <i class="fas fa-step-forward"></i>
+            </a>
+        </li>
+
+        <li class="page-item  @(!Model.ShowLast? "disabled":"")" title="Last">
+            <a asp-page="./index"
+               asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", Model.TotalPages.ToString() },{ "sortby", Model.SortBy }})"
+               class="page-link">
+                <i class="fas fa-fast-forward"></i>
+            </a>
+        </li>
+    </ul>
+</div>
