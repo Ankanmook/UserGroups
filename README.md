@@ -37,9 +37,9 @@ Finally I will focus on building the view compnent for search and pagination
 
 Front End Npm install
 For front end I have included package.json which builds and dumps the front end files to nodeModules directory
-Reason for doing that is I like using node.js to keep controll of the files I am inputing to my project
-Consequentially you can delete the files in wwwroot and it should still work
-If you publish this then it would build and put all the node files to nodeModules directory
+Reason for doing that is I like using node.js to keep control of the files I am adding to my project
+Consequentially you can delete the files in wwwroot and it should still work as links to layout are directed from nodeModules
+If you publish this then it would build and put all the node files to nodeModules directory, provided you have npm installed
 
 Person List View
 There are 3 views to list persons Page page
