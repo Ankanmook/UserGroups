@@ -57,11 +57,15 @@ namespace UserGroup.DAL
 
         public void Add(Person person)
         {
+            person.Group = _context.
+                Group.FirstOrDefault(g => g.Id == person.GroupId);
             _context.Person.Add(person);
         }
 
         public void Update(Person person)
         {
+            person.Group = _context.Group.
+                FirstOrDefault(g => g.Id == person.GroupId);
             _context.Person.Update(person);
         }
 

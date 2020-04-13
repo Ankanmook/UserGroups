@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UseGroup.DataModel.Models;
 using UserGroup.Common;
 using UserGroup.Common.Contracts;
-using UserGroup.Common.DTO;
+using UserGroup.Web.Models;
 
 namespace UserGroup.Web.Pages.Person
 {
@@ -29,7 +26,7 @@ namespace UserGroup.Web.Pages.Person
         }
 
         [BindProperty]
-        public PersonDto Person { get; set; }
+        public PersonViewModel Person { get; set; }
 
         public IEnumerable<Group> Groups { get; private set; }
 
@@ -42,13 +39,12 @@ namespace UserGroup.Web.Pages.Person
             Groups = _groupService.Get();
             if (personId.HasValue)
             {
-                Person = _mapper.Map<PersonDto>(_personService.Get(personId.Value));
+                Person = _mapper.Map<PersonViewModel>(_personService.Get(personId.Value));
             }
             else
             {
-                Person = new PersonDto();
+                Person = new PersonViewModel();
             }
-
 
             if (Person == null)
                 return RedirectToPage("./NotFound");
@@ -82,7 +78,7 @@ namespace UserGroup.Web.Pages.Person
             _personService.Save();
 
             TempData["Message"] = "Person saved!";
-            return RedirectToPage("./Detail", new { personId = personToUpsert.Id });
+            return RedirectToPage("./Details", new { personId = personToUpsert.Id });
         }
     }
 }

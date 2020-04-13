@@ -19,7 +19,6 @@ namespace UserGroup.Web.Models
 
     public class PersonViewModel
     {
-        [Required]
         public int Id { get; set; }
         [Required(ErrorMessage = "Name must be provided")]
         [MaxLength(128)]
