@@ -6,36 +6,88 @@
 
 <h1>Home</h1>
 
-<h2>Database script in UserGroup.Sql => Creat.sql</h2>
-<h2>Database backup is in the same folder</h2>
-<h2>The database is built using SQL script and then EF scaffolding was done to generate the model which resides in UserGroup.DataModel along with Context</h2>
+<h3> Describes how did I build this application</h3>
 
-<h2>There are 3 views to this page</h2>
+<br />
+<h2>Database</h2>
+<p>
+    <h4>
+        1.The database was built using SQL script and then EF scaffolding was done to generate the model which resides in UserGroup.DataModel along with Context
+    </h4>
+    <h4>
+        2.Database script in UserGroup.Sql => Creat.sql. It is idempotent (will delete and recreate DB (provided you don't have existing connection to db)
+    </h4>
+    <h4>
+        3.Database backup is in the same folder
+    </h4>
+    <h4>
+        4.Database also contains search stored procedure and seeding of 2 groups and 5 person
+    </h4>
+</p>
 
-<h3>Default View (No pagination)</h3>
-<h3>Jquery Datatable View which gets all the data from back end and then does sorting and filtering on front end (inneficient)</h3>
-<h3>Index View which has pagination and search option which only gets required filtered/paginated data from back end</h3>
+<br />
+<h2>Solution Architecture </h2>
+<p>
+    <h4>I decided to have 3 layer approach</h4>
+    <h4>DAL Layer which has entity framework and dapper repositories</h4>
+    <h4>Service Layer which has business logic</h4>
+    <h4>UI layer which has Razor pages and Api controllers</h4>
+    <h4>Reason for that was separation of concenrs and testability. </h4>
+    <h4>Each individual projects can be tested separately and if removed then it should not affect the correctned of the system Liskov substitution principle</h4>
+</p>
+<br />
 
-<h3>Searching option has Entity Framework and Dapper</h3>
-<h4>Reason to include dapper is mentioned in SearchService.cs. I like Dapper</h4>
+<h2>Api for Person and Group </h2>
+<p>
+    <h4>I decided to build the api first for this page as I like Api driven approach (first build and test api then views in this case)</h4>
+    <h4>Advantage of building api is that you can use that to build UI on single page application using something like React/Angular/Vue</h4>
+    <br />
+    <h4>Searching option has Entity Framework and Dapper</h4>
+    <h4>Reason to include dapper is mentioned in SearchService.cs. I like Dapper</h4>
+    <br />
+    <h4>Once I build and tested them then I built the UI using Razor pages which are the new features introduced in asp.net core</h4>
+    <h4>Finally I will focus on building the view compnent for search and pagination</h4>
+</p>
 
-<h3>I decided to have 3 layer approach</h3>
-<h4>DAL Layer which has entity framework and dapper repositories</h4>
-<h4>Service Layer which has business logic</h4>
-<h4>UI layer which has Razor pages and Api controllers</h4>
+<br />
 
-<h4>Reason for that was separation of concenrs and testability. </h4>
-<h4>Each individual projects can be tested separately and if removed then it should not affect the correctned of the system Lishkov principle</h4>
+<h2>Front End Npm install</h2>
+<p>
+
+    <h3>For front end I have included package.json which builds and dumps the front end files to nodeModules directory</h3>
+    <h3>Reason for doing that is I like using node.js to keep controll of the files I am inputing to my project</h3>
+    <h3>Consequentially you can delete the files in wwwroot and it should still work</h3>
+    <h3>If you publish this then it would build and put all the node files to nodeModules directory</h3>
+</p>
+
+<br />
+
+<h2>Person List View</h2>
+<p>
+    <h3>There are 3 views to list persons Page page</h3>
+    <h3>Reason => it follows an incremental approach</h3>
+    <h3>Default View (No pagination)</h3>
+    <h3>Jquery Datatable View which gets all the data from back end and then does sorting and filtering on front end (inefficient)</h3>
+    <h3>Index View which has pagination and search option which only gets required filtered/paginated data from back end</h3>
+</p>
+
+<br />
 
 
-<h3>For front end I have included package.json which builds and dumps the front end files to nodeModules directory</h3>
-<h3>Reason for doing that is I like using node.js to keep controll of the files I am inputing to my project</h3>
-<h3>Consequentially you can delete the files in wwwroot and it should still work</h3>
-<h3>If you publish this then it would build and put all the node files to nodeModules directory</h3>
+<h2>Next</h2>
+<p>
+    <h3>Build a View component for reusing the search option</h3>
+    <h3>Use vuejs to build a front end which would also include building a search component which can be reused across </h3>
+    <h3>Why choose vue cause it is lightweight </h3>
 
-<h3>I decided to build the api first for this page as I like Api direven approach</h3>
-<h3>Once I build and tested them then I built the UI using Razor pages which are the new features introduced in asp.net core</h3>
-<h3>Finally I will focus on building the viewcompnent for search and pagination</h3>
+    <h3>Build caching infrastructure in order to make some call redundant (like groups and count of person)</h3>
+</p>
 
-<h3>Advantage of building api is that you can use that to build UI on single page application using something like React/Angular/Vue</h3>
+
+
+
+
+
+
+
 
