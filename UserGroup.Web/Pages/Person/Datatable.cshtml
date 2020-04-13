@@ -33,7 +33,7 @@
                                 "data": "id",
                                 "sortable": false,
                                 "render": function (data, type, full, meta) {
-                                    return '<a href="@Url.Action("Details", "Person/Details")?personId=' + data + '">Detail</a>';
+                                    return '<a href="/Person/Details/' + data + '""> Detail</a>';
                                 }
                             },
                             {
@@ -41,8 +41,7 @@
                                 "data": "id",
                                 "sortable": false,
                                 "render": function (data, type, full, meta) {
-                                    return '<a href="@Url.Action("Edit", "Person/Edit")?personId=' + data + '"">Edit</a>';
-
+                                    return '<a href="/Person/Edit?personId=' + data + '""> Edit</a>';
                                 }
                             },
                             {
@@ -50,8 +49,7 @@
                                 "data": "id",
                                 "sortable": false,
                                 "render": function (data, type, full, meta) {
-                                    return '<a href="@Url.Action("Delete", "Person/Delete")?personId=' + data + '"">Delete</a>';
-
+                                    return '<a href="/Person/Delete?personId=' + data + '""> Delete</a>';
                                 }
                             }
                         ]
