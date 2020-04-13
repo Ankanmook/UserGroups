@@ -16,6 +16,7 @@ namespace UseGroup.DataModel.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [StringLength(128)]
+        [Required]
         public string Name { get; set; }
 
         [InverseProperty("Group")]
