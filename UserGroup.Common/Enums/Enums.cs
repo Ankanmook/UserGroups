@@ -6,10 +6,11 @@
         Desc = 1
     }
 
-    public enum SearchColumn
+    public enum SortColumn
     {
         Name,
-        Group
+        Group,
+        DateAdded,
     }
 
     public enum SearchOption

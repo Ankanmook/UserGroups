@@ -18,17 +18,27 @@ namespace UserGroup.Services
 
         public async Task<List<SearchResultDto>> Get(SearchResourceParameter resourceParameter)
         {
+            
             if (resourceParameter.Option == SearchOption.Dapper)//default
             {
                 return await _searchRepository.GetSearchResultUsingDapper(resourceParameter.Name, resourceParameter.Group,
-                resourceParameter.PageNumber, resourceParameter.PageSize);
+                resourceParameter.PageNumber, resourceParameter.PageSize,resourceParameter.SortColumn, resourceParameter.SortOrderOption);
             }
             else
             {
-                //may be bad practise
-                return await Task.FromResult(_searchRepository.GetSearchResultUsingEFCore(resourceParameter.Name, resourceParameter.Group,
-                resourceParameter.PageNumber, resourceParameter.PageSize));
+                //2 calls to the database makes this inefficient
+                var result = _searchRepository.GetSearchResultUsingEFCore(resourceParameter.Name, resourceParameter.Group,
+                resourceParameter.PageNumber, resourceParameter.PageSize, resourceParameter.SortColumn, resourceParameter.SortOrderOption);
+                
+                var count = _searchRepository.GetCount(resourceParameter.Name, resourceParameter.Group);
+
+                result.ForEach(r => r.TotalRows = count);
+                return await Task.FromResult(result);
             }
         }
+
+       
+
+        
     }
 }

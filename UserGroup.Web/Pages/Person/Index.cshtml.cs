@@ -48,7 +48,7 @@ namespace UserGroup.Web.Pages.Person
         public string SortBy { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public SortOrder SortOrder { get; set; }
+        public string SortOrder { get; set; }
 
 
         [BindProperty(SupportsGet = true)]
@@ -77,16 +77,11 @@ namespace UserGroup.Web.Pages.Person
 
         public async Task OnGetAsync()
         {
-            //name => name
-            //group => group
-            
-            //sort order => name group date added
-
             var searchResourceParameter = new SearchResourceParameter()
             {
                 PageNumber = CurrentPage,
                 PageSize = PageSize,
-                SortColumn = SortBy,
+                SortBy = SortBy,
                 SortOrder = SortOrder,
                 Option = SearchOption,
                 Name = Name,

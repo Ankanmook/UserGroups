@@ -24,8 +24,63 @@ namespace UserGroup.Common.Helper
         }
         public int GroupId { get; set; }
 
-        public SortOrder SortOrder { get; set; }
+        public string SortOrder { get; set; }
+        public SortOrder SortOrderOption { 
+            get 
+            {
+                if(string.IsNullOrWhiteSpace(SortOrder))
+                {
+                    return Enums.SortOrder.Asc;
+                }
+                else
+                {
+                    if(SortOrder == "Asc")
+                    {
+                        return Enums.SortOrder.Asc;
+                    }
+                    if (SortOrder == "Desc")
+                    {
+                        return Enums.SortOrder.Desc;
+                    }
+                    else
+                    {
+                        return Enums.SortOrder.Asc;
+                    }
+                }
 
-        public string SortColumn { get; set; } 
+            } 
+        }
+
+        public string SortBy { get; set; }
+        public SortColumn SortColumn
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(SortBy))
+                {
+                    return Enums.SortColumn.DateAdded;
+                }
+                else
+                {
+                    if (SortBy == "Name")
+                    {
+                        return Enums.SortColumn.DateAdded;
+
+                    }
+                    else if (SortBy == "DateAdded")
+                    {
+                        return Enums.SortColumn.DateAdded;
+                    }
+                    else if (SortBy == "Group")
+                    {
+                        return Enums.SortColumn.Group;
+                    }
+                    else
+                    {
+                        return Enums.SortColumn.DateAdded;
+                    }
+                }
+            }
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace UserGroup.Web.Controllers
             var sortOption = from value in sortOrders
                              select new { value = (int)value, name = value.ToString() };
 
-            var searchColumns = (SearchColumn[])Enum.GetValues(typeof(SearchColumn));
+            var searchColumns = (SortColumn[])Enum.GetValues(typeof(SortColumn));
             var searchColumn = from value in searchColumns
                                select new { name = value.ToString() };
 
