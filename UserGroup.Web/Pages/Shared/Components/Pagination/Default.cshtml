@@ -2,6 +2,17 @@
 
 <div>
     <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./index" asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<div>
+    <ul class="pagination">
         <li class="page-item @(!Model.ShowFirst? "disabled":"")" title="First">
             <a asp-page="./index"
                asp-all-route-data="@(new Dictionary<string, string>{ { "currentpage", "1" },{ "sortby", Model.SortBy }})"
