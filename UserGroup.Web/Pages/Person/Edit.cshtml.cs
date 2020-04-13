@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UseGroup.DataModel.Models;
 using UserGroup.Common;
 using UserGroup.Common.Contracts;
 using UserGroup.Common.DTO;
@@ -29,7 +31,7 @@ namespace UserGroup.Web.Pages.Person
         [BindProperty]
         public PersonDto Person { get; set; }
 
-        public IEnumerable<SelectListItem> Groups { get; private set; }
+        public IEnumerable<Group> Groups { get; private set; }
 
         public string Heading { get; set; }
 
@@ -37,9 +39,7 @@ namespace UserGroup.Web.Pages.Person
         {
             Heading = personId.HasValue ? Constants.Edit : Constants.Add;
 
-            var selectListItems = _groupService.Get().Select(s => new SelectListItem(s.Name, s.Id.ToString()));
-            Groups = new SelectList(selectListItems);
-
+            Groups = _groupService.Get();
             if (personId.HasValue)
             {
                 Person = _mapper.Map<PersonDto>(_personService.Get(personId.Value));
@@ -48,6 +48,7 @@ namespace UserGroup.Web.Pages.Person
             {
                 Person = new PersonDto();
             }
+
 
             if (Person == null)
                 return RedirectToPage("./NotFound");
@@ -59,8 +60,7 @@ namespace UserGroup.Web.Pages.Person
         {
             if (!ModelState.IsValid)
             {
-                var selectListItems = _groupService.Get().Select(s => new SelectListItem(s.Name, s.Id.ToString()));
-                Groups = new SelectList(selectListItems);
+                Groups = _groupService.Get();
                 return Page();
             }
 

@@ -21,8 +21,8 @@
     </div>
     <div class="form-group">
         <label asp-for="Person.GroupId"></label>
-        <select class="form-control" asp-for="Person.GroupId"
-                asp-items="Model.Groups"></select>
+        <select asp-for="Person.GroupId" class="form-control"
+                asp-items="@(new SelectList(Model.Groups, "Id", "Name"))"></select>
         <span class="text-danger" asp-validation-for="Person.GroupId"></span>
     </div>
 
