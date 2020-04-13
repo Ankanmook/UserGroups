@@ -13,7 +13,7 @@ namespace UserGroup.Common.DTO
         public string Name { get; set; }
 
         [Required]
-        public DateTime DateAdded { get; set; }
+        public DateTime DateAdded { get; set; } = DateTime.UtcNow;
 
         public string GroupName { get; set; }
 
