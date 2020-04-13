@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using UserGroup.Common.Contracts;
 using UserGroup.Common.DTO;
 using UserGroup.Common.Enums;
 using UserGroup.Common.Helper;
-using UserGroup.Web.Controllers;
-
 
 namespace UserGroup.Web.Pages.Person
 {
-  
     public class PaginationModel : PageModel
     {
-
         private ILogger<PaginationModel> _logger;
         private ISearchService _searchService;
         private readonly IGroupService _groupService;
         private readonly IHtmlHelper _htmlHelper;
         private readonly IMapper _mapper;
-
 
         public PaginationModel(ILogger<PaginationModel> logger,
             ISearchService searchService,
@@ -41,23 +36,23 @@ namespace UserGroup.Web.Pages.Person
             _mapper = mapper ?? throw new ArgumentException(nameof(_mapper));
         }
 
-
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
+
         [BindProperty(SupportsGet = true)]
         public string SortBy { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SortOrder { get; set; }
 
-
         [BindProperty(SupportsGet = true)]
-        public string Name { get; set; } 
+        public string Name { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string GroupName { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public SearchOption SearchOption { get; set; }
-
 
         public int Count { get; set; }
         public int PageSize { get; set; } = 5;
@@ -73,7 +68,6 @@ namespace UserGroup.Web.Pages.Person
         public long ResponseTime { get; set; }
         public IEnumerable<SelectListItem> Groups { get; private set; }
         public IEnumerable<SelectListItem> SearchOptions { get; private set; }
-
 
         public async Task OnGetAsync()
         {
@@ -101,5 +95,4 @@ namespace UserGroup.Web.Pages.Person
             SearchOptions = _htmlHelper.GetEnumSelectList<SearchOption>();
         }
     }
-
 }

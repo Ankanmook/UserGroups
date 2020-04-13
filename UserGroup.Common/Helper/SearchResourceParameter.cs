@@ -30,15 +30,15 @@ namespace UserGroup.Common.Helper
             {
                 if(string.IsNullOrWhiteSpace(AscDesc))
                 {
-                    return Enums.SortOrder.Asc;
+                    return SortOrder.Asc;
                 }
                 else
                 {
-                    if(AscDesc == "Asc")
+                    if(AscDesc == Constants.SortInAscendingOrder)
                     {
                         return SortOrder.Asc;
                     }
-                    if (AscDesc == "Desc")
+                    if (AscDesc == Constants.SortInDescendingOrder)
                     {
                         return SortOrder.Desc;
                     }
@@ -62,16 +62,16 @@ namespace UserGroup.Common.Helper
                 }
                 else
                 {
-                    if (SortBy == "Name")
+                    if (SortBy == Constants.SortByNameColumn)
                     {
                         return SortColumn.DateAdded;
 
                     }
-                    else if (SortBy == "DateAdded")
+                    else if (SortBy == Constants.SortByDateAddedColumn)
                     {
                         return SortColumn.DateAdded;
                     }
-                    else if (SortBy == "Group")
+                    else if (SortBy == Constants.SortByGroupCoumn)
                     {
                         return SortColumn.Group;
                     }
