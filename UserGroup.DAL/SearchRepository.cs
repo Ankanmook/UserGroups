@@ -69,7 +69,7 @@ namespace UserGroup.DAL
         /// <param name="sortColumn"></param>
         /// <param name="sortOrder"></param>
         /// <returns></returns>
-        public List<SearchResultDto> GetSearchResultUsingEFCore(string name,
+        public async Task<List<SearchResultDto>> GetSearchResultUsingEFCore(string name,
         string groupName,
         int pageNumber = 1,
         int pageSize = 100,
@@ -117,7 +117,8 @@ namespace UserGroup.DAL
             }
 
             
-            return person.Skip(pageSize * (pageNumber - 1))
+            return await person.Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
                 .Select(p => new SearchResultDto()
                 {
                     Id = p.Id,
@@ -125,7 +126,7 @@ namespace UserGroup.DAL
                     DateAdded = p.DateAdded,
                     GroupId = p.GroupId,
                     GroupName = p.Group.Name
-                }).ToList();
+                }).ToListAsync();
         }
 
         public int GetCount(string name, string groupName)

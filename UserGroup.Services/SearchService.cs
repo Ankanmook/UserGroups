@@ -27,13 +27,13 @@ namespace UserGroup.Services
             else
             {
                 //2 calls to the database makes this inefficient
-                var result = _searchRepository.GetSearchResultUsingEFCore(resourceParameter.Name, resourceParameter.Group,
+                var result = await _searchRepository.GetSearchResultUsingEFCore(resourceParameter.Name, resourceParameter.Group,
                 resourceParameter.PageNumber, resourceParameter.PageSize, resourceParameter.SortColumn, resourceParameter.SortOrderOption);
                 
                 var count = _searchRepository.GetCount(resourceParameter.Name, resourceParameter.Group);
 
                 result.ForEach(r => r.TotalRows = count);
-                return await Task.FromResult(result);
+                return result;
             }
         }
 
