@@ -16,6 +16,8 @@ Database
 2.Database script in UserGroup.Sql => Creat.sql. It is idempotent (will delete and recreate DB (provided you don't have active connection to db)
 3.Database backup is in the same folder
 4.Database also contains search stored procedure and seeding of 2 groups and 5 person
+5.Database version I am using is 14.0.2027.2 which corresponds to SQL Server 2017
+In case you dont have SQL server 2017 installed THEN PLEASE run Create.sql and it should create an populate database for you.
 
 Solution Architecture
 I decided to have 3 layer approach
