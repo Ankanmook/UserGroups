@@ -7,7 +7,7 @@
     ViewData["Title"] = "Pagination";
 }
 
-<h1>Pagination &and; Filtering</h1>
+    <h1>Pagination &amp; Filtering</h1>
 
 
 
@@ -47,17 +47,23 @@
             <th><a asp-page="./pagination" class="sort-link" asp-route-sortby="Name">Name</a></th>
             <th><a asp-page="./pagination" class="sort-link" asp-route-sortby="DateAdded">Date Added</a></th>
             <th><a asp-page="./pagination" class="sort-link" asp-route-sortby="Group">Group</a></th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
     <tbody>
         @foreach (var item in Model.Data)
         {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.DateAdded</td>
-                <td>@item.GroupName</td>
-            </tr>
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.DateAdded</td>
+            <td>@item.GroupName</td>
+            <td><a class="btn btn-lg" asp-page="./Details"  asp-route-personId="@item.Id">  <i class="fa fa-search-plus"></i> </a></td>
+            <td><a class="btn btn-lg" asp-page="./Edit"  asp-route-personId="@item.Id">  <i class="fa fa-edit"></i> </a></td> 
+            <td><a class="btn btn-lg" asp-page="./Delete" asp-route-personId="@item.Id">  <i class="fa fa-trash"></i> </a></td>
+        </tr>
         }
     </tbody>
 </table>
