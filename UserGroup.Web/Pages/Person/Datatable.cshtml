@@ -32,7 +32,7 @@
                                 "title": "Detail",
                                 "data": "id",
                                 "sortable": false,
-                                "render": function (data, type, full, meta) {
+                                "render": function (data) {
                                     return '<a href="/Person/Details/' + data + '""> Detail</a>';
                                 }
                             },
@@ -40,7 +40,7 @@
                                 "title": "Edit",
                                 "data": "id",
                                 "sortable": false,
-                                "render": function (data, type, full, meta) {
+                                "render": function (data) {
                                     return '<a href="/Person/Edit?personId=' + data + '""> Edit</a>';
                                 }
                             },
@@ -48,7 +48,7 @@
                                 "title": "Delete",
                                 "data": "id",
                                 "sortable": false,
-                                "render": function (data, type, full, meta) {
+                                "render": function (data) {
                                     return '<a href="/Person/Delete?personId=' + data + '""> Delete</a>';
                                 }
                             }
@@ -62,7 +62,7 @@
 
 
 <style>
-    /*sad to do it here but then could have worked out somewhere else as weel*/
+    /*sad to do it here but then could have worked out somewhere else as well*/
     /*override for bootstrap*/
     .form-inline {
         display: block;
