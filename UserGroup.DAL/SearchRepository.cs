@@ -129,7 +129,7 @@ namespace UserGroup.DAL
                 }).ToListAsync();
         }
 
-        public int GetCount(string name, string groupName)
+        public int Count(string name, string groupName)
         {
             var person = from p in _context.Person.Include(p => p.Group)
                          select p;

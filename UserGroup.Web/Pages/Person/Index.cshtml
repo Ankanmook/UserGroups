@@ -31,11 +31,6 @@
                     asp-items="Model.SearchOptions">
             </select> |
             <input type="submit" value="Search" class="btn btn-default" /> |
-            @*<span class="input-group-btn">
-                    <button class="btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </span> |*@
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
@@ -81,18 +76,34 @@
 <div>
     <ul class="pagination">
         <li class="page-item @(!Model.ShowFirst? "disabled":"")" title="First">
-            <a asp-page="./index" asp-all-route-data="@(new Dictionary<string, string>{ { "currentpage", "1" },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-fast-backward"></i></a>
+            <a asp-page="./index" 
+               asp-all-route-data="@(new Dictionary<string, string>{ { "currentpage", "1" },{ "sortby", Model.SortBy }})"
+               class="page-link">
+                <i class="fas fa-fast-backward"></i>
+            </a>
         </li>
 
         <li class="page-item @(!Model.ShowPrevious? "disabled":"")" title="Previous">
-            <a asp-page="./index" asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage -1).ToString() },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-step-backward"></i></a>
+            <a asp-page="./index" 
+               asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage -1).ToString() },{ "sortby", Model.SortBy }})" 
+               class="page-link">
+            <i class="fas fa-step-backward"></i>
+            </a>
         </li>
         <li class="page-item  @(!Model.ShowNext? "disabled":"")" title="Next">
-            <a asp-page="./index" asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage + 1).ToString() },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-step-forward"></i></a>
+            <a asp-page="./index" 
+               asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CurrentPage + 1).ToString() },{ "sortby", Model.SortBy }})" 
+               class="page-link">
+            <i class="fas fa-step-forward"></i>
+            </a>
         </li>
 
         <li class="page-item  @(!Model.ShowLast? "disabled":"")" title="Last">
-            <a asp-page="./index" asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", Model.TotalPages.ToString() },{ "sortby", Model.SortBy }})" class="page-link"><i class="fas fa-fast-forward"></i></a>
+            <a asp-page="./index"
+               asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", Model.TotalPages.ToString() },{ "sortby", Model.SortBy }})" 
+               class="page-link">
+            <i class="fas fa-fast-forward"></i>
+            </a>
         </li>
     </ul>
 </div>

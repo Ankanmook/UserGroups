@@ -11,6 +11,6 @@ namespace UserGroup.Common.Contracts
 
         Task<List<SearchResultDto>> GetSearchResultUsingEFCore(string name, string group, int pageNumber = 1, int pageSize = 20, SortColumn sortColumn = SortColumn.DateAdded, SortOrder sortOrder = SortOrder.Asc);
 
-        int GetCount(string name, string groupName);
+        int Count(string name, string groupName);
     }
 }

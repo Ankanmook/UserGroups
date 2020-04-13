@@ -30,7 +30,7 @@ namespace UserGroup.Services
                 var result = await _searchRepository.GetSearchResultUsingEFCore(resourceParameter.Name, resourceParameter.Group,
                 resourceParameter.PageNumber, resourceParameter.PageSize, resourceParameter.SortColumn, resourceParameter.SortOrderOption);
                 
-                var count = _searchRepository.GetCount(resourceParameter.Name, resourceParameter.Group);
+                var count = _searchRepository.Count(resourceParameter.Name, resourceParameter.Group);
 
                 result.ForEach(r => r.TotalRows = count);
                 return result;
