@@ -45,12 +45,25 @@ namespace UserGroup.Web.Pages.Person
 
         public SearchViewModel Persons { get; set; }
 
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["GroupSortParm"] = sortOrder == "Group" ? "group_desc" : "Group";
 
             try
             {
+                //var SearchResourceParameter = new SearchResourceParameter()
+                //{
+                //    Name = currentFilter,
+                //    PageNumber = pageNumber.HasValue ? pageNumber.Value : 0,
+                    
+                //};
+
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
                 var searchResult = await _searchService.Get(SearchResourceParameter);

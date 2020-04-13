@@ -12,16 +12,31 @@
     <a asp-page="./Edit" class="btn btn-outline-primary">Add New</a>
 </p>
 
+<div>
+    <span class="font-weight-bold">Elapsed Response Time (milliseconds): </span>
+    <span>@Model.Persons.ResponseTime</span>
+</div>
+<br />
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <select asp-for="SearchResourceParameter.Group" asp-items="Model.Groups">
+            Name:
+            <input type="text" asp-for="SearchResourceParameter.Name" /> |
+            Group:
+            <select asp-for="SearchResourceParameter.Group" 
+                    asp-items="Model.Groups">
                 <option value="">@Constants.All</option>
             </select> |
-            <select asp-for="SearchResourceParameter.Option" asp-items="Model.SearchOptions">
+            Search Option:
+            <select asp-for="SearchResourceParameter.Option" 
+                    asp-items="Model.SearchOptions">
             </select> |
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            @*<span class="input-group-btn">
+                <button class="btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span> |*@
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
@@ -71,17 +86,18 @@
     var nextDisabled = !Model.Persons.HasNextPage ? "disabled" : "";
 }
 
+
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.Persons.PageNumber - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-pageNumber="@(Model.SearchResourceParameter.PageNumber - 1)"
+   asp-route-currentFilter="@Model.SearchResourceParameter.Name"
    class="btn btn-default @prevDisabled">
     Previous
 </a>
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.Persons.PageNumber + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-pageNumber="@(Model.SearchResourceParameter.PageNumber + 1)"
+   asp-route-currentFilter="@Model.SearchResourceParameter.Name"
    class="btn btn-default @nextDisabled">
     Next
 </a>

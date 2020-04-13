@@ -23,5 +23,7 @@ namespace UserGroup.Common.Helper
             }
         }
         public int GroupId { get; set; }
+
+        public SortOrder SortOrder { get; set; }
     }
 }

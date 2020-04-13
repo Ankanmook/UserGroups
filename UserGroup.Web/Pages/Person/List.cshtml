@@ -11,9 +11,11 @@
 <form method="get">
     <div class="form-group">
         <div class="input-group">
-            <input type="search" class="form-control" asp-for="SearchResourceParameter.Name" />
+            <input type="search" class="form-control" 
+                   asp-for="SearchResourceParameter.Name" />
 
-            <select asp-for="SearchResourceParameter.Group" asp-items="Model.Groups">
+            <select asp-for="SearchResourceParameter.Group"
+                    asp-items="Model.Groups">
                 <option value="">@Constants.All</option>
             </select>
 
