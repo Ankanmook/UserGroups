@@ -16,5 +16,6 @@ namespace UserGroup.Common.Contracts
         void Update(Person person);
 
         void Delete(Person person);
+        int GetCount();
     }
 }

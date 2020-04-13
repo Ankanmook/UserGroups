@@ -17,6 +17,8 @@ namespace UserGroup.Web.Profiles
             CreateMap<Group, Common.DTO.GroupUpdateDto>().ReverseMap();//redundant
 
             CreateMap<SearchResultViewModel, Common.DTO.SearchResultDto>().ReverseMap();
+
+            CreateMap<PersonViewModel, Person>().ReverseMap();
         }
     }
 }

@@ -19,6 +19,11 @@ namespace UserGroup.Services
             return _groupRepository.Get(resourceParameters);
         }
 
+        public IEnumerable<Group> Get()
+        {
+            return _groupRepository.Get();
+        }
+
         public Group Get(int id)
         {
             return _groupRepository.Get(id);

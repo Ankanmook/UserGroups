@@ -43,7 +43,7 @@ namespace UserGroup.DAL
             string group,
             int pageNumber = 1,
             int pageSize = 100,
-            SearchColumn sortColumn = SearchColumn.Name,
+            SortColumn sortColumn = SortColumn.DateAdded,
             SortOrder sortOrder = SortOrder.Asc)
         {
             return await GetResultsAsync<SearchResultDto>(SearchPerson_StoreProc,
@@ -69,11 +69,11 @@ namespace UserGroup.DAL
         /// <param name="sortColumn"></param>
         /// <param name="sortOrder"></param>
         /// <returns></returns>
-        public List<SearchResultDto> GetSearchResultUsingEFCore(string name,
+        public async Task<List<SearchResultDto>> GetSearchResultUsingEFCore(string name,
         string groupName,
         int pageNumber = 1,
         int pageSize = 100,
-        SearchColumn sortColumn = SearchColumn.Name,
+        SortColumn sortColumn = SortColumn.DateAdded,
         SortOrder sortOrder = SortOrder.Asc)
         {
             var person = from p in _context.Person.Include(p => p.Group)
@@ -96,29 +96,29 @@ namespace UserGroup.DAL
                 select p;
             }
 
-            if (sortColumn == SearchColumn.Name && sortOrder == SortOrder.Asc)
+            if (sortColumn == SortColumn.DateAdded && sortOrder == SortOrder.Asc)
             {
                 person.OrderBy(p => p.Name).ThenBy(p => p.Group);
             }
 
-            if (sortColumn == SearchColumn.Group && sortOrder == SortOrder.Asc)
+            if (sortColumn == SortColumn.Group && sortOrder == SortOrder.Asc)
             {
                 person.OrderBy(p => p.Group).ThenBy(p => p.Name);
             }
 
-            if (sortColumn == SearchColumn.Name && sortOrder == SortOrder.Desc)
+            if (sortColumn == SortColumn.DateAdded && sortOrder == SortOrder.Desc)
             {
                 person.OrderByDescending(p => p.Group).ThenBy(p => p.Name);
             }
 
-            if (sortColumn == SearchColumn.Group && sortOrder == SortOrder.Desc)
+            if (sortColumn == SortColumn.Group && sortOrder == SortOrder.Desc)
             {
                 person.OrderByDescending(p => p.Group).ThenBy(p => p.Name);
             }
 
-            //page size problem needs to be addressed for EF
-
-            return person.Skip(pageSize * (pageNumber - 1))
+            
+            return await person.Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
                 .Select(p => new SearchResultDto()
                 {
                     Id = p.Id,
@@ -126,7 +126,31 @@ namespace UserGroup.DAL
                     DateAdded = p.DateAdded,
                     GroupId = p.GroupId,
                     GroupName = p.Group.Name
-                }).ToList();
+                }).ToListAsync();
+        }
+
+        public int Count(string name, string groupName)
+        {
+            var person = from p in _context.Person.Include(p => p.Group)
+                         select p;
+
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                name = $"%{name.ToLower()}%";
+                person = from p in person
+                         where EF.Functions.Like(p.Name.ToLower(), name)
+                         select p;
+            }
+
+            if (!string.IsNullOrWhiteSpace(groupName))//can restrict user to send group id only
+            {
+                groupName = $"%{groupName.ToLower()}%";
+                person = from p in person
+                         where EF.Functions.Like(p.Group.Name.ToLower(), groupName)
+                         select p;
+            }
+            return person.Any() ? person.Count(): 0;
         }
     }
 }

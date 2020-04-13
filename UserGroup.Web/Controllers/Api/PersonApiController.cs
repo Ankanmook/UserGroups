@@ -13,14 +13,14 @@ namespace UserGroup.Web.Controllers
 {
     [ApiController]
     [Route("api/person")]
-    public class PersonController : Controller
+    public class PersonApiController : Controller
     {
-        private readonly ILogger<PersonController> _logger;
+        private readonly ILogger<PersonApiController> _logger;
         private readonly IPersonService _personService;
         private readonly IMapper _mapper;
 
 
-        public PersonController(ILogger<PersonController> logger,
+        public PersonApiController(ILogger<PersonApiController> logger,
             IPersonService personService,
             IMapper mapper)
         {

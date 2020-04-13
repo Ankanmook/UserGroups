@@ -1,0 +1,76 @@
+﻿@page
+@model UserGroup.Web.Pages.Person.DatatableModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Person using JQuery Datatable</h2>
+
+<table class="table" id="persons">
+</table>
+
+@section Scripts {
+
+
+        <script src="~/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+        <script src="~/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+        <link href="~/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" />
+
+        <script>
+        $(function () {
+
+            $.ajax("/api/person/",
+                { method: "get" })
+                .then(function (response) {
+                    $("#persons").dataTable({
+                        data: response,
+                        columns: [
+                            { "title": "Name", "data": "name" },
+                            { "title": "Date Added", "data": "dateAdded" },
+                            { "title": "Group", "data": "groupName" },
+                            {
+                                "title": "Detail",
+                                "data": "id",
+                                "sortable": false,
+                                "render": function (data) {
+                                    return '<a href="/Person/Details/' + data + '""> Detail</a>';
+                                }
+                            },
+                            {
+                                "title": "Edit",
+                                "data": "id",
+                                "sortable": false,
+                                "render": function (data) {
+                                    return '<a href="/Person/Edit?personId=' + data + '""> Edit</a>';
+                                }
+                            },
+                            {
+                                "title": "Delete",
+                                "data": "id",
+                                "sortable": false,
+                                "render": function (data) {
+                                    return '<a href="/Person/Delete?personId=' + data + '""> Delete</a>';
+                                }
+                            }
+                        ]
+                    });
+                });
+        });
+
+
+        </script>
+
+
+<style>
+    /*sad to do it here but then could have worked out somewhere else as well*/
+    /*override for bootstrap*/
+    .form-inline {
+        display: block;
+    }
+
+    /*override for footer*/
+    .footer {
+        position: relative;
+    }
+</style>
+}

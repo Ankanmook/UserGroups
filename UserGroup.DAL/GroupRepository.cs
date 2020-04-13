@@ -22,6 +22,13 @@ namespace UserGroup.DAL
                 .ToList();
         }
 
+
+        public IEnumerable<Group> Get()
+        {
+            return _context.Group
+                .ToList();
+        }
+
         public Group Get(int id)
         {
             return _context.Group.FirstOrDefault(g => g.Id == id);

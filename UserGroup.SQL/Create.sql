@@ -19,7 +19,7 @@ GO
 CREATE TABLE [Group]
 (
 	[Id] int not null IDENTITY(1,1),
-	[Name] varchar(128), -- need to write some validation tests
+	[Name] varchar(128) not null, -- need to write some validation tests
 	CONSTRAINT [PK_Group] PRIMARY KEY CLUSTERED ([Id] Asc)
 )
 GO
@@ -40,7 +40,7 @@ CREATE TABLE [Person]
 	[Id] int not null IDENTITY(1,1),
 	[Name] varchar(128) not null, --need to write some tests validation
 	[GroupId] int not null CONSTRAINT FK_Person_Group REFERENCES [Group](Id),
-	[DateAdded] DateTime not null,
+	[DateAdded] DateTime not null Default(GETUTCDATE()),
 	CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED ([Id] Asc)
 )
 GO

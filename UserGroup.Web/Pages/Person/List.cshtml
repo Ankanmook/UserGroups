@@ -1,0 +1,39 @@
+﻿@page
+@model UserGroup.Web.Pages.Person.ListModel
+@using UserGroup.Common
+@{
+    ViewData["Title"] = "Persons";
+}
+
+<h1>List Person</h1>
+
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" 
+                   asp-for="SearchResourceParameter.Name" />
+
+            <select asp-for="SearchResourceParameter.Group"
+                    asp-items="Model.Groups">
+                <option value="">@Constants.All</option>
+            </select>
+
+            <span class="input-group-btn">
+                <button class="btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<a asp-page="./Edit" class="btn btn-outline-primary">Add New</a>
+
+@foreach (var person in Model.Persons)
+{
+    <partial name="_Summary" model="person" />
+}
+
+@section footer {
+}

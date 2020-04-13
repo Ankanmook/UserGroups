@@ -12,13 +12,13 @@ namespace UserGroup.Web.Controllers
 {
     [ApiController]
     [Route("api/group")]
-    public class GroupController : Controller
+    public class GroupApiController : Controller
     {
-        private readonly ILogger<GroupController> _logger;
+        private readonly ILogger<GroupApiController> _logger;
         private readonly IGroupService _groupService;
         private readonly IMapper _mapper;
 
-        public GroupController(ILogger<GroupController> logger,
+        public GroupApiController(ILogger<GroupApiController> logger,
             IGroupService groupService,
             IMapper mapper)
         {

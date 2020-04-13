@@ -7,7 +7,7 @@ namespace UserGroup.Common.Contracts
     public interface IGroupService
     {
         IEnumerable<Group> Get(ResourceParameters resourceParameters);
-
+        IEnumerable<Group> Get();
         Group Get(int id);
 
         bool Exists(int id);
