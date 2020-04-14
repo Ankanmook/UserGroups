@@ -1,4 +1,11 @@
-Run following command on UserGroup.Web npm install
+Dapper
+Entity Framework
+Automapper
+NLog
+Razor Pages => functionality of Asp.net MVC Core
+
+Run following command on UserGroup.Web
+npm install 
 
 Database 
   1.The database was built using SQL script and then EF scaffolding was done to generate the model which resides in UserGroup.DataModel along with Context 
