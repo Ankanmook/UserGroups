@@ -1,0 +1,31 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">@Model.Name</h3>
+        <div>
+            <span class="font-weight-bold">Date Added:</span>
+            <span>@Model.DateAdded</span>
+        </div>
+        <div>
+            <span class="font-weight-bold">Group:</span>
+            <span>@Model.GroupName</span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-lg"
+           asp-page="./Details"
+           asp-route-personId="@Model.Id">
+            <i class="fa fa-search-plus"></i>
+        </a>
+        <a class="btn btn-lg"
+           asp-page="./Edit"
+           asp-route-personId="@Model.Id">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a class="btn btn-lg"
+           asp-page="./Delete"
+           asp-route-personId="@Model.Id">
+            <i class="fa fa-trash"></i>
+        </a>
+    </div>
+
+</div>

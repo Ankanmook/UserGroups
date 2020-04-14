@@ -32,7 +32,8 @@
 
 @foreach (var person in Model.Persons)
 {
-    <partial name="_Summary" model="person" />
+    <vc:person-summary person="@person"></vc:person-summary>
+    @*<partial name="_Summary" model="person" />*@
 }
 
 @section footer {
