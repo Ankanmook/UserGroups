@@ -1,10 +1,15 @@
 Dapper
+
 Entity Framework
+
 Automapper
+
 NLog
+
 Razor Pages => functionality of Asp.net MVC Core
 
 Run following command on UserGroup.Web
+
 npm install 
 
 Database 
