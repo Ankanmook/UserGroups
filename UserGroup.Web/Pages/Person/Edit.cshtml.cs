@@ -26,7 +26,7 @@ namespace UserGroup.Web.Pages.Person
         }
 
         [BindProperty]
-        public PersonViewModel Person { get; set; }
+        public PersonEditViewModel Person { get; set; }
 
         public IEnumerable<Group> Groups { get; private set; }
 
@@ -39,11 +39,11 @@ namespace UserGroup.Web.Pages.Person
             Groups = _groupService.Get();
             if (personId.HasValue)
             {
-                Person = _mapper.Map<PersonViewModel>(_personService.Get(personId.Value));
+                Person = _mapper.Map<PersonEditViewModel>(_personService.Get(personId.Value));
             }
             else
             {
-                Person = new PersonViewModel();
+                Person = new PersonEditViewModel();
             }
 
             if (Person == null)

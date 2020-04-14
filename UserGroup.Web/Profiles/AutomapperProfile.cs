@@ -18,7 +18,9 @@ namespace UserGroup.Web.Profiles
 
             CreateMap<SearchResultViewModel, Common.DTO.SearchResultDto>().ReverseMap();
 
-            CreateMap<PersonViewModel, Person>().ReverseMap();
+            //for UI code making sure any controller ode is decoupled from common
+            CreateMap<PersonEditViewModel, Person>().ReverseMap();
+            CreateMap <PersonViewModel, Person>().ReverseMap();
         }
     }
 }

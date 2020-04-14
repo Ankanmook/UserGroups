@@ -11,6 +11,7 @@ using UserGroup.Common.Contracts;
 using UserGroup.Common.DTO;
 using UserGroup.Common.Helper;
 using UserGroup.DataModel.Helpers;
+using UserGroup.Web.Models;
 
 namespace UserGroup.Web.Pages.Person
 {
@@ -41,12 +42,12 @@ namespace UserGroup.Web.Pages.Person
 
         [BindProperty(SupportsGet =true)]
         public SearchResourceParameter SearchResourceParameter { get; set; }
-        public IEnumerable<PersonDto> Persons { get; private set; }
+        public IEnumerable<PersonViewModel> Persons { get; private set; }
         public IEnumerable<SelectListItem> Groups { get; private set; }
 
         public void OnGet()
         {
-            Persons = _mapper.Map<IEnumerable<PersonDto>>(_personService.Get(SearchResourceParameter));
+            Persons = _mapper.Map<IEnumerable<PersonViewModel>>(_personService.Get(SearchResourceParameter));
             Groups = new SelectList(_groupService.Get().Select(s=>s.Name).ToList());
         }
     }

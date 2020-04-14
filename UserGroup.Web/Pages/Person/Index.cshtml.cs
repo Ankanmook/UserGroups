@@ -15,15 +15,15 @@ using UserGroup.Common.Helper;
 
 namespace UserGroup.Web.Pages.Person
 {
-    public class PaginationModel : PageModel
+    public class IndexModel : PageModel
     {
-        private ILogger<PaginationModel> _logger;
+        private ILogger<IndexModel> _logger;
         private ISearchService _searchService;
         private readonly IGroupService _groupService;
         private readonly IHtmlHelper _htmlHelper;
         private readonly IMapper _mapper;
 
-        public PaginationModel(ILogger<PaginationModel> logger,
+        public IndexModel(ILogger<IndexModel> logger,
             ISearchService searchService,
              IGroupService groupService,
              IHtmlHelper htmlHelper,

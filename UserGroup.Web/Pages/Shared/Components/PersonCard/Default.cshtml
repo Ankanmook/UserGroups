@@ -1,0 +1,28 @@
+﻿@model UserGroup.Web.Models.PersonViewModel
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-4">
+                Name
+            </dt>
+            <dd class="col-sm-4">
+                Group
+            </dd>
+            <dt class="col-sm-4">
+                Date Added
+            </dt>
+        </dl>
+
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Model.Name
+            </dt>
+            <dd class="col-sm-4">
+                @Model.GroupName
+            </dd>
+            <dt class="col-sm-4">
+                @Model.DateAdded
+            </dt>
+        </dl>
+
+    </div>
