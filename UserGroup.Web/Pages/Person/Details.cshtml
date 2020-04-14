@@ -8,29 +8,7 @@
 <h1>@Model.Person.Name Details</h1>
 
 <div>
-    <dl class="row">
-        <dt class="col-sm-4">
-            Name
-        </dt>
-        <dd class="col-sm-4">
-            Group
-        </dd>
-        <dt class="col-sm-4">
-            Date Added
-        </dt>
-    </dl>
-
-    <dl class="row">
-        <dt class="col-sm-4">
-            @Model.Person.Name
-        </dt>
-        <dd class="col-sm-4">
-            @Model.Person.GroupName
-        </dd>
-        <dt class="col-sm-4">
-            @Model.Person.DateAdded
-        </dt>
-    </dl>
+    <vc:person-card person="@Model.Person"></vc:person-card>
 
     <form method="post">
         <input type="hidden" asp-for="Person.Id" />
